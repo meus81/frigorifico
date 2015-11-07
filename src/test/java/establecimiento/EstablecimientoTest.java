@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,36 +19,32 @@ import tropa.Ubicacion;
 public class EstablecimientoTest {
 	private Establecimiento establecimiento;
 
-	private Tropa crearTropa(int numeroTropa, int animalesRecibidos, DTe dte, Corral corral, int cantidadPorCorral) {
-		Tropa tropa = new Tropa();
-		tropa.setNumeroTropa(numeroTropa);
-		tropa.setAnimalesRecibidos(animalesRecibidos);
-		tropa.setDte(dte);
-		tropa.setFechaIngreso(new GregorianCalendar());
-
-		Ubicacion ubicacion1 = new Ubicacion(corral, cantidadPorCorral);
-		Set<Ubicacion> ubicaciones = new HashSet<Ubicacion>();
-		ubicaciones.add(ubicacion1);
-		tropa.setUbicaciones(ubicaciones);
-
-		return tropa;
-
-	}
-
 	@Before
 	public void inicializarEstablecimiento() {
 		establecimiento = new Establecimiento();
 
-		establecimiento.agregarTropa(crearTropa(1, 10, new DTe(34, 15), new Corral(1, 20), 10));
-		establecimiento.agregarTropa(crearTropa(55, 45, new DTe(35, 50), new Corral(2, 50), 45));
+		Ubicacion ubicacion = new Ubicacion(new Corral(1, 20), 10);
+		Set<Ubicacion> ubicaciones1 = new HashSet<Ubicacion>();
+		ubicaciones1.add(ubicacion);
+
+		Ubicacion ubicacion2 = new Ubicacion(new Corral(2, 50), 45);
+		Set<Ubicacion> ubicaciones2 = new HashSet<Ubicacion>();
+		ubicaciones2.add(ubicacion2);
+
+		establecimiento.agregarTropa(new Tropa(1, 10, new DTe(34, 15), ubicaciones1));
+		establecimiento.agregarTropa(new Tropa(55, 45, new DTe(35, 50), ubicaciones2));
 
 	}
 
 	@Test
 	public void agregarTropa() {
 
+		Ubicacion ubicacion = new Ubicacion(new Corral(3, 20), 20);
+		Set<Ubicacion> ubicaciones = new HashSet<Ubicacion>();
+		ubicaciones.add(ubicacion);
+
 		int cantidadPrevia = establecimiento.cantidadTropas();
-		establecimiento.agregarTropa(crearTropa(2, 20, new DTe(100, 100), new Corral(3, 20), 20));
+		establecimiento.agregarTropa(new Tropa(2, 20, new DTe(100, 100), ubicaciones));
 		int cantidadPosterior = establecimiento.cantidadTropas();
 
 		assertEquals(cantidadPrevia + 1, cantidadPosterior);
@@ -57,7 +52,7 @@ public class EstablecimientoTest {
 		Tropa tropa;
 		try {
 			tropa = establecimiento.obtenerTropa(2);
-			assertEquals(tropa.getDte().getNumero(), 100);
+			assertEquals(tropa.getDte().getNumeroDte(), 100);
 			assertTrue(tropa.getDte().getAnimalesEnviados() >= tropa.getAnimalesRecibidos());
 		} catch (TropaInexistenteException e) {
 			e.excErrorTropaInexistente();
@@ -84,11 +79,11 @@ public class EstablecimientoTest {
 	@Test
 	public void eliminarTropa() {
 
-		int cantTropasInicial = establecimiento.cantidadTotalTropas();
+		int cantTropasInicial = establecimiento.cantidadTropas();
 
 		establecimiento.eliminarTropa(1);
 
-		int cantTropasFinal = establecimiento.cantidadTotalTropas();
+		int cantTropasFinal = establecimiento.cantidadTropas();
 
 		assertEquals(cantTropasInicial - 1, cantTropasFinal);
 		assertFalse(false);
