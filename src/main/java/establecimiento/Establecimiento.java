@@ -3,10 +3,15 @@ package establecimiento;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import excepciones.TropaInexistenteException;
 import tropa.Tropa;
 
 public class Establecimiento {
+	
+	final static Logger logger = Logger.getLogger(Establecimiento.class);
+		
 	private int numeroEstablecimiento;
 	private String titular;
 	private String nombre;
@@ -118,12 +123,14 @@ public class Establecimiento {
 
 	public void agregarTropa(Tropa tropa) {
 		this.getTropas().add(tropa);
+		logger.debug("Estoy agregando la tropa numero:" + tropa.getNumeroTropa());
 
 	}
 
 	public Tropa obtenerTropa(int numeroTropa) throws TropaInexistenteException {
 		for (Tropa tropa : this.getTropas()) {
 			if (tropa.getNumeroTropa() == numeroTropa)
+				logger.debug("Estoy obteniendo la tropa numero:" + tropa.getNumeroTropa());
 				return tropa;
 		}
 		throw new TropaInexistenteException();
@@ -133,9 +140,11 @@ public class Establecimiento {
 		for (Tropa tropa : this.getTropas()) {
 			if (tropa.getNumeroTropa() == numeroTropa) {
 				this.getTropas().remove(tropa);
+				logger.debug("Estoy eliminando la tropa numero:" + tropa.getNumeroTropa());
 				return true;
 			}
 		}
+		logger.debug("No pude eliminar la tropa numero:" + numeroTropa +" porque no la encobtre");
 		return false;
 	}
 

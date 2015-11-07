@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,10 +18,12 @@ import tropa.Tropa;
 import tropa.Ubicacion;
 
 public class EstablecimientoTest {
+	final static Logger logger = Logger.getLogger(EstablecimientoTest.class);
 	private Establecimiento establecimiento;
 
 	@Before
 	public void inicializarEstablecimiento() {
+		logger.debug("Estamos inicializando el @Test en el @Before");
 		establecimiento = new Establecimiento();
 
 		Ubicacion ubicacion = new Ubicacion(new Corral(1, 20), 10);
@@ -38,7 +41,7 @@ public class EstablecimientoTest {
 
 	@Test
 	public void agregarTropa() {
-
+		logger.debug("Estamos en el @Test agregarTropa...");
 		Ubicacion ubicacion = new Ubicacion(new Corral(3, 20), 20);
 		Set<Ubicacion> ubicaciones = new HashSet<Ubicacion>();
 		ubicaciones.add(ubicacion);
@@ -63,11 +66,15 @@ public class EstablecimientoTest {
 
 	@Test(expected = TropaInexistenteException.class)
 	public void obtenerTropaException() throws TropaInexistenteException {
+		logger.debug("Estamos en el @Test obtenerTropaException...");
+
 		establecimiento.obtenerTropa(10000);
 	}
 
 	@Test
 	public void obtenerTropa() {
+		logger.debug("Estamos en el @Test obtenerTropa...");
+
 		try {
 			establecimiento.obtenerTropa(55);
 		} catch (TropaInexistenteException e) {
@@ -78,6 +85,8 @@ public class EstablecimientoTest {
 
 	@Test
 	public void eliminarTropa() {
+		logger.debug("Estamos en el @Test eliminarTropa...");
+
 
 		int cantTropasInicial = establecimiento.cantidadTropas();
 
