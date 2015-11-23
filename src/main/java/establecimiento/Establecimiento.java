@@ -129,9 +129,10 @@ public class Establecimiento {
 
 	public Tropa obtenerTropa(int numeroTropa) throws TropaInexistenteException {
 		for (Tropa tropa : this.getTropas()) {
-			if (tropa.getNumeroTropa() == numeroTropa)
+			if (tropa.getNumeroTropa() == numeroTropa){
 				logger.debug("Estoy obteniendo la tropa numero:" + tropa.getNumeroTropa());
 				return tropa;
+			}
 		}
 		throw new TropaInexistenteException();
 	}

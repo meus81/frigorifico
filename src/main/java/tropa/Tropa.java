@@ -11,17 +11,17 @@ public class Tropa {
 	private GregorianCalendar fechaIngreso;
 	private GregorianCalendar fechaFaena;
 	private int animalesRecibidos;
-	private Set<Ubicacion> ubicaciones;
+	private Set<Corral> corrales;
 	private List<Animal> animales;
 	private DTe dte;
 
-	public Tropa(int numeroTropa, int animalesRecibidos, DTe dte, Set<Ubicacion> ubicaciones) {
+	public Tropa(int numeroTropa, int animalesRecibidos, DTe dte, Set<Corral> corrales) {
 
 		this.setNumeroTropa(numeroTropa);
 		this.setAnimalesRecibidos(animalesRecibidos);
 		this.setDte(dte);
 		this.setFechaIngreso(new GregorianCalendar());
-		this.setUbicaciones(ubicaciones);
+		this.setCorrales(corrales);
 		this.setAnimales(new ArrayList<Animal>());
 
 	}
@@ -58,12 +58,12 @@ public class Tropa {
 		this.animalesRecibidos = animalesRecibidos;
 	}
 
-	public Set<Ubicacion> getUbicaciones() {
-		return ubicaciones;
+	public Set<Corral> getCorrales() {
+		return corrales;
 	}
 
-	public void setUbicaciones(Set<Ubicacion> ubicaciones) {
-		this.ubicaciones = ubicaciones;
+	public void setCorrales(Set<Corral> corrales) {
+		this.corrales = corrales;
 	}
 
 	public List<Animal> getAnimales() {
