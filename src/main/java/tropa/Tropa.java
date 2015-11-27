@@ -8,6 +8,7 @@ import java.util.Set;
 public class Tropa {
 
 	private long numeroTropa;
+	
 	private GregorianCalendar fechaIngreso;
 	private GregorianCalendar fechaFaena;
 	private int animalesRecibidos;

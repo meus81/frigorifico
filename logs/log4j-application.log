@@ -1,1 +1,21 @@
-
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:25 - Estamos inicializando el @Test en el @Before
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:1
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:55
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:95 - Estamos en el @Test eliminarTropa...
+2015-11-27 10:52:56 DEBUG Establecimiento:144 - Estoy eliminando la tropa numero:1
+2015-11-27 10:52:56 DEBUG Establecimiento:148 - No pude eliminar la tropa numero:1 porque no la encobtre
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:25 - Estamos inicializando el @Test en el @Before
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:1
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:55
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:50 - Estamos en el @Test agregarTropa...
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:2
+2015-11-27 10:52:56 DEBUG Establecimiento:133 - Estoy obteniendo la tropa numero:2
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:25 - Estamos inicializando el @Test en el @Before
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:1
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:55
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:76 - Estamos en el @Test obtenerTropaException...
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:25 - Estamos inicializando el @Test en el @Before
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:1
+2015-11-27 10:52:56 DEBUG Establecimiento:126 - Estoy agregando la tropa numero:55
+2015-11-27 10:52:56 DEBUG EstablecimientoTest:83 - Estamos en el @Test obtenerTropa...
+2015-11-27 10:52:56 DEBUG Establecimiento:133 - Estoy obteniendo la tropa numero:55

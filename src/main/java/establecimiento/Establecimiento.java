@@ -11,8 +11,9 @@ import tropa.Tropa;
 public class Establecimiento {
 	
 	final static Logger logger = Logger.getLogger(Establecimiento.class);
-		
-	private int numeroEstablecimiento;
+	
+	private int idEstablecimiento;
+	private String codigoEstablecimiento;
 	private String titular;
 	private String nombre;
 	private long cuit;
@@ -28,12 +29,12 @@ public class Establecimiento {
 		this.setTropas(new ArrayList<Tropa>());
 	}
 
-	public int getNumeroEstablecimiento() {
-		return numeroEstablecimiento;
+	public String getCodigoEstablecimiento() {
+		return codigoEstablecimiento;
 	}
 
-	public void setNumeroEstablecimiento(int numeroEstablecimiento) {
-		this.numeroEstablecimiento = numeroEstablecimiento;
+	public void setCodigoEstablecimiento(String codigoEstablecimiento) {
+		this.codigoEstablecimiento = codigoEstablecimiento;
 	}
 
 	public String getTitular() {
