@@ -5,17 +5,46 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tropa")
 public class Tropa {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name="id_tropa")
+	private int idTropa;
+	
+	@Column(name="numero_tropa")
 	private long numeroTropa;
 	
+	@Column(name="fecha_ingreso")
 	private GregorianCalendar fechaIngreso;
+	
+	@Column(name="fecha_faena")
 	private GregorianCalendar fechaFaena;
+	
+	@Column(name="animales_recibidos")
 	private int animalesRecibidos;
-	private Set<Corral> corrales;
+	
+	@OneToMany(cascade = {CascadeType.PERSIST})
 	private List<Animal> animales;
+	
+	private Set<Corral> corrales;
 	private DTe dte;
-
+	
+	public Tropa(){
+		
+	}
+	
 	public Tropa(int numeroTropa, int animalesRecibidos, DTe dte, Set<Corral> corrales) {
 
 		this.setNumeroTropa(numeroTropa);

@@ -3,27 +3,45 @@ package establecimiento;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.apache.log4j.Logger;
 
 import excepciones.TropaInexistenteException;
 import tropa.Tropa;
 
+@Entity
+@Table(name="establecimiento")
 public class Establecimiento {
 	
 	final static Logger logger = Logger.getLogger(Establecimiento.class);
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name="id_establecimiento")
 	private int idEstablecimiento;
+	
+	@Column(name="codigo_establecimiento")
 	private String codigoEstablecimiento;
 	private String titular;
 	private String nombre;
 	private long cuit;
+	@Column(name="numero_habilitacion")
 	private int numeroHabilitacion;
 	private String telefono;
 	private String direccion;
 	private String localidad;
 	private String provincia;
+	
+	@OneToMany(cascade = {CascadeType.PERSIST})
 	private List<Tropa> tropas;
-	private List<Long> tropasReservadas;
 
 	public Establecimiento() {
 		this.setTropas(new ArrayList<Tropa>());
@@ -107,14 +125,6 @@ public class Establecimiento {
 
 	public void setTropas(List<Tropa> tropas) {
 		this.tropas = tropas;
-	}
-
-	public List<Long> getTropasReservadas() {
-		return tropasReservadas;
-	}
-
-	public void setTropasReservadas(List<Long> tropasReservadas) {
-		this.tropasReservadas = tropasReservadas;
 	}
 
 	public int cantidadTropas() {
