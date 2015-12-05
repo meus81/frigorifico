@@ -13,7 +13,7 @@ public class Categoria {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_categoria")
 	private int idCategoria;
 	

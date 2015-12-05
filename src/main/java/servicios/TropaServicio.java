@@ -6,34 +6,32 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import configuracion.Aplicacion;
-import tropa.Animal;
+import tropa.Tropa;
 
-public class AnimalServicio {
-
-	public List<Animal> obtenerAnimales(){
-		Aplicacion ap = Aplicacion.getInstance();
-		EntityManager em = ap.getEntityManager();
-		
-		Query query = em.createQuery("SELECT a FROM Animal a");
-		List<Animal> todosLosAnimales = (List<Animal>) query.getResultList();
-		
-		return todosLosAnimales;
-	}
+public class TropaServicio {
 	
-	public void salvarAnimal(Animal animal){
+	public List<Tropa> obtenerTropas() {
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
-		try{
+
+		Query query = em.createQuery("SELECT t FROM Tropa t");
+		List<Tropa> todasLasTropas = (List<Tropa>) query.getResultList();
+
+		return todasLasTropas;
+	}
+
+	public void salvarTropa(Tropa tropa) {
+		Aplicacion ap = Aplicacion.getInstance();
+		EntityManager em = ap.getEntityManager();
+		try {
 			em.getTransaction().begin();
-			em.persist(animal);
+			em.persist(tropa);
 			em.getTransaction().commit();
-			}
-		catch(Exception e){
+		} catch (Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 }

@@ -25,4 +25,8 @@ public class Aplicacion {
 	public EntityManager getEntityManager(){
 		return _instance.em;
 	}
+	
+	public void closeEntityManagerFactory(){
+		_instance.emf.close();
+	}
 }

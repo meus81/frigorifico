@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,7 +25,7 @@ public class Establecimiento {
 	final static Logger logger = Logger.getLogger(Establecimiento.class);
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_establecimiento")
 	private int idEstablecimiento;
 	
@@ -41,6 +42,7 @@ public class Establecimiento {
 	private String provincia;
 	
 	@OneToMany(cascade = {CascadeType.PERSIST})
+	@JoinColumn(name="establecimiento_id_establecimiento")
 	private List<Tropa> tropas;
 
 	public Establecimiento() {

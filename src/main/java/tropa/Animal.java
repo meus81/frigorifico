@@ -14,14 +14,14 @@ import javax.persistence.Table;
 public class Animal {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_animal")
 	private int idAnimal;
 	private int garron;
 	private double peso;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "id_categoria", nullable = false, updatable = false)
+	@JoinColumn(name = "categoria_id_categoria", nullable = false, updatable = false)
 	private Categoria categoria;
 	
 	
