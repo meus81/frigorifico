@@ -41,8 +41,8 @@ public class Establecimiento {
 	private String localidad;
 	private String provincia;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST})
-	@JoinColumn(name="establecimiento_id_establecimiento")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="establecimiento_id_establecimiento", nullable=false)
 	private List<Tropa> tropas;
 
 	public Establecimiento() {

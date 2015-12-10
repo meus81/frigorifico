@@ -42,8 +42,8 @@ public class EstablecimientoServicio {
 			em.merge(establecimiento);
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			em.getTransaction().rollback();
 			e.printStackTrace();
+			em.getTransaction().rollback();
 		}
 
 		

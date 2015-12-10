@@ -30,7 +30,7 @@ public class Tropa {
 	
 	@Column(name="fecha_ingreso")
 	private GregorianCalendar fechaIngreso;
-	
+
 	@Column(name="fecha_faena")
 	private GregorianCalendar fechaFaena;
 	
