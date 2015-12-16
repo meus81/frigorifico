@@ -14,18 +14,17 @@ public class TropaServicioTest {
 	
 	@Before
 	public void crearUobtenerEstablecimiento(){
-		EstablecimientoServicio es= new EstablecimientoServicio();
-		for (Establecimiento e : es.obtenerEstablecimientos()) {
-			establecimiento= e;
-			return;
-		}
+		EstablecimientoServicioDatabase es= new EstablecimientoServicioDatabase();
+		
+		establecimiento= es.obtenerEstablecimiento(1);
+
 		if (establecimiento == null) {
 			Establecimiento capiangos = new Establecimiento();
 			capiangos.setCodigoEstablecimiento("01.029.0.21924/00");
 			capiangos.setCuit(30714579785L);
 			capiangos.setNombre("Capiangos S.R.L.");
-			capiangos.setLocalidad("Chascomús");
-			capiangos.setDireccion("Calle Chascomús");
+			capiangos.setLocalidad("ChascomÃºs");
+			capiangos.setDireccion("Calle ChascomÃºs");
 			capiangos.setNumeroHabilitacion(4833);
 			capiangos.setProvincia("Buenos Aires");
 			capiangos.setTelefono("(0221) 15-5574055");
@@ -43,12 +42,11 @@ public class TropaServicioTest {
 		tropa1.setFechaFaena(new GregorianCalendar(2015,11,1,15,20,10));
 		tropa1.setFechaIngreso(new GregorianCalendar(2015,10,30,8,30,00));
 		
-		EstablecimientoServicio es= new EstablecimientoServicio();
-		
+		EstablecimientoServicioDatabase es= new EstablecimientoServicioDatabase();
 		
 		establecimiento.agregarTropa(tropa1);
-		es.salvarOActualizarEstablecimiento(establecimiento);
-		TropaServicio ts= new TropaServicio(); 
+		es.actualizarEstablecimiento(establecimiento);
+		TropaServicioDatabase ts= new TropaServicioDatabase(); 
 		
 		for (Tropa t : ts.obtenerTropas()) {
 			

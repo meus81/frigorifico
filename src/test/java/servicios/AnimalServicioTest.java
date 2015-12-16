@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import servicios.AnimalServicio;
+import servicios.AnimalServicioDatabase;
 import tropa.Animal;
 import tropa.Categoria;
 import tropa.Tropa;
@@ -19,10 +19,10 @@ public class AnimalServicioTest {
 		
 	@Before
 	public void asignarCategoriaTropa(){
-		CategoriaServicio cs= new CategoriaServicio();
-		categoria= cs.obtenerCategoria();
+		CategoriaServicioDatabase cs= new CategoriaServicioDatabase();
+		categoria= cs.obtenerCategoria(1);
 	
-		TropaServicio ts= new TropaServicio();
+		TropaServicioDatabase ts= new TropaServicioDatabase();
 		for (Tropa t : ts.obtenerTropas()) {
 			tropa = t;
 			break;
@@ -43,7 +43,7 @@ public class AnimalServicioTest {
 				
 		tropa.setAnimales(animales);
 		
-		AnimalServicio as= new AnimalServicio();
+		AnimalServicioDatabase as= new AnimalServicioDatabase();
 		
 		as.salvarAnimal(animal1);
 		
@@ -51,7 +51,7 @@ public class AnimalServicioTest {
 			
 			System.out.println("RESULTADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + a.getGarron());
 			System.out.println(animal1.getGarron());
-			Assert.assertTrue(a.getGarron() == animal1.getGarron());
+			Assert.assertTrue("El numero de garron es distinto del animal recien salvado al obtenido desde la bbdd", a.getGarron() == animal1.getGarron());
 		}
 		
 	}

@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import configuracion.Aplicacion;
 import tropa.Tropa;
 
-public class TropaServicio {
+public class TropaServicioDatabase extends ServiciosDatabase{
 	
 	public List<Tropa> obtenerTropas() {
 		Aplicacion ap = Aplicacion.getInstance();
@@ -21,17 +21,11 @@ public class TropaServicio {
 	}
 
 	public void salvarTropa(Tropa tropa) {
-		Aplicacion ap = Aplicacion.getInstance();
-		EntityManager em = ap.getEntityManager();
-		try {
-			em.getTransaction().begin();
-			em.persist(tropa);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-			e.printStackTrace();
-		}
-
+		this.salvar(tropa);
+	}
+	
+	public Tropa obtenerTropa(int id){
+		return (Tropa) this.obtener(Tropa.class, id);
 	}
 
 }
