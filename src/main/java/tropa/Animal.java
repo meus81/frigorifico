@@ -41,4 +41,23 @@ public class Animal {
 		this.peso = peso;
 	}
 
+	public int getIdAnimal() {
+		return idAnimal;
+	}
+
+	public void setIdAnimal(int idAnimal) {
+		this.idAnimal = idAnimal;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	
+	
+
 }

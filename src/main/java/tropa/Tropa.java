@@ -38,7 +38,7 @@ public class Tropa {
 	private int animalesRecibidos;
 	
 	@OneToMany(cascade = {CascadeType.PERSIST})
-	@JoinColumn(name="tropa_id_tropa")
+	@JoinColumn(name="tropa_id_tropa",  nullable=false)
 	private List<Animal> animales;
 	
 	@Transient
