@@ -27,5 +27,10 @@ public class TropaServicioDatabase extends ServiciosDatabase{
 	public Tropa obtenerTropa(int id){
 		return (Tropa) this.obtener(Tropa.class, id);
 	}
+	
+	public int obtenerSiguienteNroDeTropa(){
+		//TODO terminar de implementar este metodo
+		throw new UnsupportedOperationException("Metodo aun no implementado");
+	}
 
 }

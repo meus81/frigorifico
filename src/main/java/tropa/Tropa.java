@@ -116,5 +116,9 @@ public class Tropa {
 	public void setDte(DTe dte) {
 		this.dte = dte;
 	}
+	
+	public void agregarAnimal(Animal animal){
+		this.getAnimales().add(animal);
+	}
 
 }
