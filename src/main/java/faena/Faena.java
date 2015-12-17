@@ -2,8 +2,6 @@ package faena;
 
 import java.util.GregorianCalendar;
 
-import org.hibernate.cfg.NotYetImplementedException;
-import org.hibernate.type.YesNoType;
 
 import servicios.TropaServicioDatabase;
 import tropa.Animal;
@@ -48,6 +46,6 @@ public class Faena {
 	}
 	
 	public int obtenerNumeroGarronPorDia(){
-		throw new NotYetImplementedException();
+		
 	}
 }

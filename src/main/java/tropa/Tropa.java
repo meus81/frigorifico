@@ -1,7 +1,7 @@
 package tropa;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -29,10 +29,10 @@ public class Tropa {
 	private long numeroTropa;
 	
 	@Column(name="fecha_ingreso")
-	private GregorianCalendar fechaIngreso;
+	private Date fechaIngreso;
 
 	@Column(name="fecha_faena")
-	private GregorianCalendar fechaFaena;
+	private Date fechaFaena;
 	
 	@Column(name="animales_recibidos")
 	private int animalesRecibidos;
@@ -55,7 +55,7 @@ public class Tropa {
 		this.setNumeroTropa(numeroTropa);
 		this.setAnimalesRecibidos(animalesRecibidos);
 		this.setDte(dte);
-		this.setFechaIngreso(new GregorianCalendar());
+		this.setFechaIngreso(new Date());
 		this.setCorrales(corrales);
 		this.setAnimales(new ArrayList<Animal>());
 
@@ -69,19 +69,19 @@ public class Tropa {
 		this.numeroTropa = numeroTropa;
 	}
 
-	public GregorianCalendar getFechaIngreso() {
+	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(GregorianCalendar fechaIngreso) {
+	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public GregorianCalendar getFechaFaena() {
+	public Date getFechaFaena() {
 		return fechaFaena;
 	}
 
-	public void setFechaFaena(GregorianCalendar fechaFaena) {
+	public void setFechaFaena(Date fechaFaena) {
 		this.fechaFaena = fechaFaena;
 	}
 
