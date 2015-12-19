@@ -40,8 +40,8 @@ public class TropaServicioTest {
 		Tropa tropa1 = new Tropa();
 		tropa1.setAnimalesRecibidos(20);
 		tropa1.setNumeroTropa(34);
-		tropa1.setFechaFaena(new Date(2015,11,1,15,20,10));
-		tropa1.setFechaIngreso(new Date(2015,10,30,8,30,00));
+		tropa1.setFechaFaena(new GregorianCalendar(2014,11,1,15,20,10));
+		tropa1.setFechaIngreso(new GregorianCalendar(2014,10,30,8,30,00));
 		
 		EstablecimientoServicioDatabase es= new EstablecimientoServicioDatabase();
 		

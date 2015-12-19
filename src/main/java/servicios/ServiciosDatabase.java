@@ -1,5 +1,6 @@
 package servicios;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -46,7 +47,8 @@ public class ServiciosDatabase {
 
 	}
 
-	public int obtenerUltimoNumeroGarron(Date fecha) {
+	public int obtenerUltimoNumeroGarron(Calendar fecha) {
+		System.out.println("La fecha para buscar es: " + fecha.getTime());
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
 		Query query = em
