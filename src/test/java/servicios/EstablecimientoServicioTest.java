@@ -12,8 +12,8 @@ public class EstablecimientoServicioTest {
 		capiangos.setCodigoEstablecimiento("01.029.0.21924/00");
 		capiangos.setCuit(30714579785L);
 		capiangos.setNombre("Capiangos S.R.L.");
-		capiangos.setLocalidad("Chascom�s");
-		capiangos.setDireccion("Calle Chascom�s");
+		capiangos.setLocalidad("Chascomús");
+		capiangos.setDireccion("Calle Chascomús");
 		capiangos.setNumeroHabilitacion(4833);
 		capiangos.setProvincia("Buenos Aires");
 		capiangos.setTelefono("(0221) 15-5574055");

@@ -1,8 +1,6 @@
 package faena;
 
-import java.sql.Date;
 import java.util.GregorianCalendar;
-
 
 import servicios.TropaServicioDatabase;
 import tropa.Animal;
@@ -19,7 +17,7 @@ public class Faena {
 		long numeroTropa= tropaServicio.obtenerSiguienteNroDeTropa();
 		tropa = new Tropa();
 		
-		tropa.setFechaFaena(new Date());
+		tropa.setFechaFaena(new GregorianCalendar());
 		tropa.setNumeroTropa(numeroTropa);
 		
 		tropaServicio.salvarTropa(tropa);
@@ -47,6 +45,6 @@ public class Faena {
 	}
 	
 	public int obtenerNumeroGarronPorDia(){
-		
+		return 0;
 	}
 }
