@@ -1,7 +1,9 @@
 package tropa;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="tropa")
@@ -29,10 +35,13 @@ public class Tropa {
 	private long numeroTropa;
 	
 	@Column(name="fecha_ingreso")
-	private Date fechaIngreso;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar fechaIngreso;
 
 	@Column(name="fecha_faena")
-	private Date fechaFaena;
+	//@Type(type="date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar fechaFaena;
 	
 	@Column(name="animales_recibidos")
 	private int animalesRecibidos;
@@ -55,7 +64,7 @@ public class Tropa {
 		this.setNumeroTropa(numeroTropa);
 		this.setAnimalesRecibidos(animalesRecibidos);
 		this.setDte(dte);
-		this.setFechaIngreso(new Date());
+		this.setFechaIngreso(new GregorianCalendar());
 		this.setCorrales(corrales);
 		this.setAnimales(new ArrayList<Animal>());
 
@@ -69,19 +78,19 @@ public class Tropa {
 		this.numeroTropa = numeroTropa;
 	}
 
-	public Date getFechaIngreso() {
+	public Calendar getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(Calendar fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public Date getFechaFaena() {
+	public Calendar getFechaFaena() {
 		return fechaFaena;
 	}
 
-	public void setFechaFaena(Date fechaFaena) {
+	public void setFechaFaena(Calendar fechaFaena) {
 		this.fechaFaena = fechaFaena;
 	}
 

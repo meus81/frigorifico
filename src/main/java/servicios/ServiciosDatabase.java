@@ -1,11 +1,16 @@
 package servicios;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import configuracion.Aplicacion;
+import tropa.Tropa;
 
 public class ServiciosDatabase {
 
@@ -46,14 +51,32 @@ public class ServiciosDatabase {
 
 	}
 
-	public int obtenerUltimoNumeroGarron(Date fecha) {
+	public int obtenerUltimoNumeroGarron(Calendar fecha) {
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
+		
+		Query query1 = em.createQuery("select t from Tropa t");
+		ArrayList<Tropa> lista = (ArrayList<Tropa>) query1.getResultList();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		for (Tropa tropa : lista) {
+			System.out.println("Fecha de faena: " + tropa.getFechaFaena());
+			fmt.setCalendar(tropa.getFechaFaena());
+		    String fechaFormateadaBBDD = fmt.format(tropa.getFechaFaena().getTime());
+
+			System.out.println("Fecha faena formateada: " + fechaFormateadaBBDD);
+			
+			System.out.println("Comparacion con equals: "+ tropa.getFechaFaena().equals(fecha));
+			System.out.println("Comparacion con compareTo: "+ tropa.getFechaFaena().compareTo(fecha));
+		}
+		
+		fmt.setCalendar(fecha);
+	    String fechaFormateadaParametro = fmt.format(fecha.getTime());
+	
 		Query query = em
-				.createQuery("SELECT max(a.garron) FROM Tropa t inner join t.animales a where t.fechaFaena = :fecha")
-				.setParameter("fecha", fecha);
+				.createQuery("SELECT max(a.garron) FROM Tropa t inner join t.animales a where to_char(t.fechaFaena, 'yyyy-MM-dd') = :fecha")
+				.setParameter("fecha", fechaFormateadaParametro);
 		int ultimoGarron = (Integer) query.getSingleResult();
-		return ultimoGarron;
+		return ultimoGarron; 
 	}
 
 }
