@@ -1,5 +1,6 @@
 package faena;
 
+import java.sql.Date;
 import java.util.GregorianCalendar;
 
 
@@ -18,7 +19,7 @@ public class Faena {
 		long numeroTropa= tropaServicio.obtenerSiguienteNroDeTropa();
 		tropa = new Tropa();
 		
-		tropa.setFechaFaena(new GregorianCalendar());
+		tropa.setFechaFaena(new Date());
 		tropa.setNumeroTropa(numeroTropa);
 		
 		tropaServicio.salvarTropa(tropa);

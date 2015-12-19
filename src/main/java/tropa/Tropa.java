@@ -16,7 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="tropa")
@@ -31,9 +35,12 @@ public class Tropa {
 	private long numeroTropa;
 	
 	@Column(name="fecha_ingreso")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar fechaIngreso;
 
 	@Column(name="fecha_faena")
+	//@Type(type="date")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar fechaFaena;
 	
 	@Column(name="animales_recibidos")

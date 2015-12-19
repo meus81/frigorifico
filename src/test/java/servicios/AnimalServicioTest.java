@@ -34,8 +34,8 @@ public class AnimalServicioTest {
 	@Test
 	public void animalServicio (){
 		Animal animal1 = new Animal();
-		animal1.setGarron(12);
-		animal1.setPeso(150);
+		animal1.setGarron(14);
+		animal1.setPeso(200);
 		animal1.setCategoria(categoria);
 		
 		List<Animal> animales= new ArrayList<Animal>();
