@@ -1,10 +1,9 @@
 package servicios;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TemporalType;
 
 import configuracion.Aplicacion;
 
@@ -47,12 +46,13 @@ public class ServiciosDatabase {
 
 	}
 
-	public int obtenerUltimoNumeroGarron(GregorianCalendar fecha) {
+	public int obtenerUltimoNumeroGarron(Date fecha, Date fecha2) {
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
 		Query query = em
-				.createQuery("SELECT max(a.garron) FROM Tropa t inner join t.animales a where t.fechaFaena = :fecha")
-				.setParameter("fecha", fecha, TemporalType.TIMESTAMP);
+				.createQuery("SELECT max(a.garron) FROM Tropa t inner join t.animales a where t.fechaFaena Between :fecha and :fecha2")
+				.setParameter("fecha", fecha)
+				.setParameter("fecha2", fecha2);
 		
 		int ultimoGarron = (Integer) query.getSingleResult();
 		return ultimoGarron; 
