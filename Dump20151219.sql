@@ -121,7 +121,7 @@ CREATE TABLE `tropa` (
   PRIMARY KEY (`id_tropa`),
   KEY `fk_tropa_establecimiento_idx` (`establecimiento_id_establecimiento`),
   CONSTRAINT `fk_tropa_establecimiento` FOREIGN KEY (`establecimiento_id_establecimiento`) REFERENCES `establecimiento` (`id_establecimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `tropa` (
 
 LOCK TABLES `tropa` WRITE;
 /*!40000 ALTER TABLE `tropa` DISABLE KEYS */;
-INSERT INTO `tropa` VALUES (7,'2014-11-30 00:00:00','2014-12-01 00:00:00',20,1,34),(8,'2015-11-30 00:00:00','2015-12-01 00:00:00',20,1,35);
+INSERT INTO `tropa` VALUES (7,'2014-11-30 00:00:00','2014-12-01 00:00:00',20,1,34),(8,'2015-11-30 00:00:00','2015-12-01 00:00:00',20,1,35),(10,'2010-11-30 08:30:00','2010-12-01 15:20:10',100,1,30),(11,'2010-11-30 08:30:00','2010-12-01 15:20:10',100,1,30);
 /*!40000 ALTER TABLE `tropa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -143,4 +143,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-21 16:44:34
+-- Dump completed on 2015-12-21 17:41:03
