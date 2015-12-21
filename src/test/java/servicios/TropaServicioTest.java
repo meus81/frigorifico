@@ -1,6 +1,5 @@
 package servicios;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.junit.Assert;
@@ -35,13 +34,13 @@ public class TropaServicioTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void tropaServicio (){
 		Tropa tropa1 = new Tropa();
-		tropa1.setAnimalesRecibidos(20);
-		tropa1.setNumeroTropa(34);
-		tropa1.setFechaFaena(new GregorianCalendar(2015,11,1,15,20,10));
-		tropa1.setFechaIngreso(new GregorianCalendar(2015,10,30,8,30,00));
+		tropa1.setAnimalesRecibidos(100);
+		tropa1.setNumeroTropa(30);
+		tropa1.setFechaFaena(new GregorianCalendar(2010,11,1,15,20,10).getTime());
+		tropa1.setFechaIngreso(new GregorianCalendar(2010,10,30,8,30,00).getTime());
 		
 		EstablecimientoServicioDatabase es= new EstablecimientoServicioDatabase();
 		
@@ -55,6 +54,16 @@ public class TropaServicioTest {
 			System.out.println(tropa1.getNumeroTropa());
 			Assert.assertTrue(t.getNumeroTropa() == tropa1.getNumeroTropa());
 		}
+		
+	}
+	
+	@Test
+	public void ultimaTropaTest(){
+		TropaServicioDatabase ts = new TropaServicioDatabase();
+		long ultimaTropa = ts.obtenerSiguienteNroDeTropa();
+		
+		Assert.assertTrue("La ULTIMA tropa NO es igual a 35!!!!!!!!!!!!!!!", ultimaTropa==35);
+		
 		
 	}
 
