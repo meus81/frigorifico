@@ -14,8 +14,24 @@ public class Faena {
 	private Tropa tropa;
 	private int numeroDeGarron;
 	private TropaServicioDatabase tropaServicio = new TropaServicioDatabase();
+	
+	public Tropa getTropa() {
+		return tropa;
+	}
+	
+	public void setTropa(Tropa tropa) {
+		this.tropa = tropa;
+	}
+	
+	public int getNumeroDeGarron() {
+		return numeroDeGarron;
+	}
+	
+	public void setNumeroDeGarron(int numeroDeGarron) {
+		this.numeroDeGarron = numeroDeGarron;
+	}
 
-	public void inicializarTropa() {
+	public void inicializarFaena() {
 		long numeroTropa = tropaServicio.obtenerSiguienteNroDeTropa();
 		tropa = new Tropa();
 
@@ -23,7 +39,7 @@ public class Faena {
 		tropa.setNumeroTropa(numeroTropa);
 
 		tropaServicio.salvarTropa(tropa);
-		numeroDeGarron = obtenerNumeroGarronPorDia();
+		numeroDeGarron = obtenerUltimoGarronDelDia();
 
 	}
 
@@ -38,14 +54,15 @@ public class Faena {
 		tropaServicio.actualizar(tropa);
 
 		Etiqueta etiqueta = new Etiqueta();
-		etiqueta.imprimirEtiquetas(animal, cabezaAlMedio);
+		etiqueta.imprimirEtiquetas(tropa, animal, cabezaAlMedio);
 	}
 
-	public void finalizarTropa() {
-
+	public void finalizarFaena() {
+		//TODO no sabemos bien que puede llegar a hacer este metodo. Destruir el objeto tal vez??
 	}
 
-	public int obtenerNumeroGarronPorDia() {
+
+	public int obtenerUltimoGarronDelDia() {
 		ServiciosDatabase sd = new ServiciosDatabase();
 
 		GregorianCalendar fechaDesde = new GregorianCalendar();

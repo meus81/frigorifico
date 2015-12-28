@@ -3,6 +3,7 @@ package servicios;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import configuracion.Aplicacion;
@@ -50,12 +51,17 @@ public class ServiciosDatabase {
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
 		Query query = em
-				.createQuery("SELECT max(a.garron) FROM Tropa t inner join t.animales a where t.fechaFaena Between :fecha and :fecha2")
-				.setParameter("fecha", fecha)
-				.setParameter("fecha2", fecha2);
-		
-		int ultimoGarron = (Integer) query.getSingleResult();
-		return ultimoGarron; 
+				.createQuery(
+						"SELECT max(a.garron) FROM Tropa t inner join t.animales a where t.fechaFaena Between :fecha and :fecha2")
+				.setParameter("fecha", fecha).setParameter("fecha2", fecha2);
+		int ultimoGarron;
+		try {
+			ultimoGarron = (Integer) query.getSingleResult();
+		} catch (NullPointerException nre) {
+			ultimoGarron = 1;
+		}
+
+		return ultimoGarron;
 	}
 
 }
