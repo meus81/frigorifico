@@ -51,11 +51,11 @@ public class ServiciosDatabase {
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
 		Query query = em
-				.createQuery("SELECT max(a.garron) FROM Tropa t inner join t.animales a where t.fechaFaena = :fecha")
+				.createQuery("SELECT t.numeroTropa FROM Tropa t WHERE t.fechaFaena = :fecha")
 				.setParameter("fecha", fecha, TemporalType.TIMESTAMP);
 		
-		int ultimoGarron = (Integer) query.getSingleResult();
-		return ultimoGarron; 
+		Long ultimoGarron = (Long) query.getSingleResult();
+		return ultimoGarron.intValue(); 
 	}
 
 }

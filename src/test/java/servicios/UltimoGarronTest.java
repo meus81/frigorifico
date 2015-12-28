@@ -12,7 +12,7 @@ public class UltimoGarronTest {
 		GregorianCalendar fecha = new GregorianCalendar();
 		fecha.set(2015, Calendar.DECEMBER, 1, 15, 20, 10);
 	
-		System.out.println("La FECHAAAAAAAAAAAAAAAAAAA " + fecha);
+		System.out.println("La FECHAAAAAAAAAAAAAAAAAAA " + fecha.getTime());
 		System.out.println("El ultimo Garron del dia " + fecha + "es: " + sd.obtenerUltimoNumeroGarron(fecha));
 		
 	}
