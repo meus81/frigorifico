@@ -28,9 +28,13 @@ public class TropaServicioDatabase extends ServiciosDatabase{
 		return (Tropa) this.obtener(Tropa.class, id);
 	}
 	
-	public int obtenerSiguienteNroDeTropa(){
-		//TODO terminar de implementar este metodo
-		throw new UnsupportedOperationException("Metodo aun no implementado");
+	public long obtenerSiguienteNroDeTropa(){
+		Aplicacion ap = Aplicacion.getInstance();
+		EntityManager em = ap.getEntityManager();
+
+		Query query = em.createQuery("SELECT max(numeroTropa) FROM Tropa t where YEAR(fechaIngreso) = YEAR(current_date())");
+		long ultimaTropa = (Long) query.getSingleResult();
+		return ultimaTropa;
 	}
 
 }

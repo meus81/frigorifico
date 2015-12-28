@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `frigorifico` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `frigorifico`;
--- MySQL dump 10.13  Distrib 5.5.46, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: frigorifico
 -- ------------------------------------------------------
--- Server version	5.5.46-0ubuntu0.14.04.2
+-- Server version	5.7.10-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -115,15 +113,15 @@ DROP TABLE IF EXISTS `tropa`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tropa` (
   `id_tropa` int(11) NOT NULL AUTO_INCREMENT COMMENT '	',
-  `fecha_ingreso` timestamp NULL DEFAULT NULL,
-  `fecha_faena` timestamp NULL DEFAULT NULL,
+  `fecha_ingreso` datetime DEFAULT NULL,
+  `fecha_faena` datetime DEFAULT NULL,
   `animales_recibidos` int(11) DEFAULT NULL,
   `establecimiento_id_establecimiento` int(11) NOT NULL,
   `numero_tropa` int(11) NOT NULL,
   PRIMARY KEY (`id_tropa`),
   KEY `fk_tropa_establecimiento_idx` (`establecimiento_id_establecimiento`),
   CONSTRAINT `fk_tropa_establecimiento` FOREIGN KEY (`establecimiento_id_establecimiento`) REFERENCES `establecimiento` (`id_establecimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +130,7 @@ CREATE TABLE `tropa` (
 
 LOCK TABLES `tropa` WRITE;
 /*!40000 ALTER TABLE `tropa` DISABLE KEYS */;
-INSERT INTO `tropa` VALUES (7,'2014-11-30 11:30:00','2014-12-01 18:20:10',20,1,34),(8,'2015-11-30 11:30:00','2015-12-01 18:20:10',20,1,34);
+INSERT INTO `tropa` VALUES (7,'2014-11-30 00:00:00','2014-12-01 00:00:00',20,1,34),(8,'2015-11-30 00:00:00','2015-12-01 00:00:00',20,1,35),(10,'2010-11-30 08:30:00','2010-12-01 15:20:10',100,1,30),(11,'2010-11-30 08:30:00','2010-12-01 15:20:10',100,1,30);
 /*!40000 ALTER TABLE `tropa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -145,4 +143,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-19 11:10:57
+-- Dump completed on 2015-12-21 17:41:03
