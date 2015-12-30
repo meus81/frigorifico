@@ -26,7 +26,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		
+
 		<!-- JPA dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -45,5 +45,14 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.33</version>
 		</dependency>
+
+		<!-- QR Code Library -->
+		<dependency>
+			<groupId>net.glxn</groupId>
+			<artifactId>qrgen</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
 	</dependencies>
 </project>
