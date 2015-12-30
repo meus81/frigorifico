@@ -41,7 +41,9 @@ public class GeneradorEtiqueta {
 		    g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
 		    // Now we perform our rendering
-		    graphics.drawString("Hello world!", 100, 100);
+		    graphics.drawString(datos, 100, 100);
+		    //graphics.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
+		    //graphics.drawImage(new Image, getWidth() - fromBytes.getWidth(), 0, this);
 
 		    // tell the caller that this page is part
 		    // of the printed document
