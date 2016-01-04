@@ -1,18 +1,15 @@
 package qrCode;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 public class GeneradorEtiqueta {
 
-	public void imprimir(String datos, ByteArrayOutputStream codigoQRGenerado){
+	public void imprimir(String datos, File codigoQRGenerado, MedioImpresion medioImpresion) {
 		PrinterJob job = PrinterJob.getPrinterJob();
-		job.setPrintable(new RenderEtiqueta(datos, codigoQRGenerado));
+		job.setCopies(1);
+		job.setPrintable(medioImpresion);
 		try {
 			job.print();
 		} catch (PrinterException e) {
@@ -20,43 +17,22 @@ public class GeneradorEtiqueta {
 			e.printStackTrace();
 		}
 	}
-	
-	private class RenderEtiqueta implements Printable{
-		String datos;
-		ByteArrayOutputStream codigoQRGenerado;
-		
-		
-		
-		public RenderEtiqueta(String datos, ByteArrayOutputStream codigoQRGenerado) {
-			this.datos = datos;
-			this.codigoQRGenerado = codigoQRGenerado;
-		}
 
-		public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-			// User (0,0) is typically outside the
-		    // imageable area, so we must translate
-		    // by the X and Y values in the PageFormat
-		    // to avoid clipping.
-		    Graphics2D g2d = (Graphics2D)graphics;
-		    g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
-		    // Now we perform our rendering
-		    graphics.drawString(datos, 100, 100);
-		    //graphics.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
-		    //graphics.drawImage(new Image, getWidth() - fromBytes.getWidth(), 0, this);
 
-		    // tell the caller that this page is part
-		    // of the printed document
-		    return PAGE_EXISTS;
-		}
-		
-	}
-	
 	public static void main(String[] args) {
+
+		// TODO
+		// http://stackoverflow.com/questions/9308412/sending-a-barcode-to-a-zebra-printer-from-a-java-application
+		GeneradorEtiqueta ge = new GeneradorEtiqueta();
+		String datos = "Tropa: 4 \n Fecha Faena: 12/10/2014 \n Numero de Garron: 4"
+				+ "\n Peso del animal: 180 \n Categoría del animal: CHA";
+		GeneradorCodigoQR generadorCodigoQR = new GeneradorCodigoQR();		
+		File codigoQRGenerado = generadorCodigoQR.crearCodigoQrFile(datos);
 		
-		//TODO http://stackoverflow.com/questions/9308412/sending-a-barcode-to-a-zebra-printer-from-a-java-application
-		
-		
+		MedioImpresionImpresoraComun miic = 
+				new MedioImpresionImpresoraComun(datos, codigoQRGenerado);
+		ge.imprimir(datos,codigoQRGenerado, miic);
 
 	}
 

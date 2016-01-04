@@ -1,8 +1,11 @@
 package faena;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 import qrCode.GeneradorCodigoQR;
+import qrCode.GeneradorEtiqueta;
+import qrCode.MedioImpresionImpresoraComun;
 import tropa.Animal;
 import tropa.Tropa;
 
@@ -24,19 +27,11 @@ public class Etiqueta {
 				+ "\n Categoría del animal: " + animal.getCategoria();
 		
 		
-		GeneradorCodigoQR generadorCodigoQR = new GeneradorCodigoQR();
-		
-		ByteArrayOutputStream codigoQRGenerado = generadorCodigoQR.crearCodigoQR(datos);
-		
-		
-
-		/*
-		 * System.out.println("Tropa: " + tropa.getNumeroTropa());
-		 * System.out.println("Fecha Faena: " + tropa.getFechaFaena());
-		 * System.out.println("Numero de Garron: " + animal.getGarron());
-		 * System.out.println("Peso del animal: " + peso); System.out.println(
-		 * "Categoría del animal: " + animal.getCategoria());
-		 */
-
+		GeneradorCodigoQR generadorCodigoQR = new GeneradorCodigoQR();		
+		File codigoQRGenerado = generadorCodigoQR.crearCodigoQrFile(datos);
+		MedioImpresionImpresoraComun miic = 
+				new MedioImpresionImpresoraComun(datos, codigoQRGenerado);		
+		GeneradorEtiqueta ge = new GeneradorEtiqueta();
+		ge.imprimir(datos, codigoQRGenerado, miic);
 	}
 }
