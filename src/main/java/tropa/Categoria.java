@@ -17,7 +17,6 @@ public class Categoria {
 	@Column(name="id_categoria")
 	private int idCategoria;
 	
-	
 	private String descripcion;
 	private String codigo;
 	private String abreviatura;

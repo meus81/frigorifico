@@ -1,8 +1,11 @@
 package faena;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import establecimiento.Establecimiento;
+import servicios.EstablecimientoServicioDatabase;
 import servicios.ServiciosDatabase;
 import servicios.TropaServicioDatabase;
 import tropa.Animal;
@@ -32,13 +35,23 @@ public class Faena {
 	}
 
 	public void inicializarFaena() {
+		//TODO Si la tropa se creo antes de faenar no se debe crear una nueva tropa, 
+		// se debe actualizar
+		// Como se sabe que se debe actualizar un tropa existente? porque el 
+		// usuario al momento de faenar ingresa el numero de tropa
+		
+		EstablecimientoServicioDatabase establecimientoServicioDatabase = new EstablecimientoServicioDatabase();
+		Establecimiento establecimiento = establecimientoServicioDatabase.obtenerEstablecimiento(1);
+				
 		long numeroTropa = tropaServicio.obtenerSiguienteNroDeTropa();
-		tropa = new Tropa();
+		this.setTropa(new Tropa());
+		this.getTropa().setAnimales(new ArrayList<Animal>());
+				
+		this.getTropa().setFechaFaena(new GregorianCalendar().getTime());
+		this.getTropa().setNumeroTropa(numeroTropa);
 
-		tropa.setFechaFaena(new GregorianCalendar().getTime());
-		tropa.setNumeroTropa(numeroTropa);
-
-		tropaServicio.salvarTropa(tropa);
+		establecimiento.agregarTropa(this.getTropa());
+		establecimientoServicioDatabase.actualizarEstablecimiento(establecimiento);
 		numeroDeGarron = obtenerUltimoGarronDelDia();
 
 	}
@@ -50,11 +63,11 @@ public class Faena {
 		animal.setGarron(numeroDeGarron);
 		numeroDeGarron++;
 
-		tropa.agregarAnimal(animal);
-		tropaServicio.actualizar(tropa);
+		this.getTropa().agregarAnimal(animal);
+		tropaServicio.actualizar(this.getTropa());
 
 		Etiqueta etiqueta = new Etiqueta();
-		etiqueta.imprimirEtiquetas(tropa, animal, cabezaAlMedio);
+		etiqueta.imprimirEtiquetas(this.getTropa(), animal, cabezaAlMedio);
 	}
 
 	public void finalizarFaena() {

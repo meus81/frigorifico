@@ -1,6 +1,5 @@
 package faena;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import qrCode.GeneradorCodigoQR;
