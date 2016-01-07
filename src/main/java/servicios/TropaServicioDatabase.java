@@ -28,6 +28,17 @@ public class TropaServicioDatabase extends ServiciosDatabase{
 		return (Tropa) this.obtener(Tropa.class, id);
 	}
 	
+	public Tropa obtenerTropaPorNroTropa(long nroTropa){
+		Aplicacion ap = Aplicacion.getInstance();
+		EntityManager em = ap.getEntityManager();
+		
+		Query query = em.createQuery("SELECT t FROM Tropa t WHERE t.numeroTropa = :nroTropa")
+				.setParameter("nroTropa", nroTropa);
+	
+		Tropa tropa = (Tropa) query.getResultList().get(0);
+		return tropa;
+	}
+	
 	public long obtenerUltimoNroDeTropa(){
 		//TODO este metodo se tiene q modificar para que funcione en base a donde provienen los animales
 		Aplicacion ap = Aplicacion.getInstance();

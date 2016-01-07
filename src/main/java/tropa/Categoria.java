@@ -47,5 +47,10 @@ public class Categoria {
 	}
 	public void setAbreviatura(String abreviatura) {
 		this.abreviatura = abreviatura;
-	}	
+	}
+	
+	@Override
+	public String toString(){
+		return this.getAbreviatura();
+	}
 }

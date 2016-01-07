@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import establecimiento.Establecimiento;
+import servicios.AnimalServicioDatabase;
 import servicios.EstablecimientoServicioDatabase;
 import servicios.ServiciosDatabase;
 import servicios.TropaServicioDatabase;
@@ -14,18 +15,10 @@ import tropa.Tropa;
 
 public class Faena {
 
-	private Tropa tropa;
+
 	private int numeroDeGarron;
 	private TropaServicioDatabase tropaServicio = new TropaServicioDatabase();
-	
-	public Tropa getTropa() {
-		return tropa;
-	}
-	
-	public void setTropa(Tropa tropa) {
-		this.tropa = tropa;
-	}
-	
+
 	public int getNumeroDeGarron() {
 		return numeroDeGarron;
 	}
@@ -42,32 +35,51 @@ public class Faena {
 		
 		EstablecimientoServicioDatabase establecimientoServicioDatabase = new EstablecimientoServicioDatabase();
 		Establecimiento establecimiento = establecimientoServicioDatabase.obtenerEstablecimiento(1);
-				
+		
 		long numeroTropa = tropaServicio.obtenerSiguienteNroDeTropa();
-		this.setTropa(new Tropa());
-		this.getTropa().setAnimales(new ArrayList<Animal>());
-				
-		this.getTropa().setFechaFaena(new GregorianCalendar().getTime());
-		this.getTropa().setNumeroTropa(numeroTropa);
+		Tropa tropa = (new Tropa());
+		tropa.setAnimales(new ArrayList<Animal>());
+		tropa.setEstablecimiento(establecimiento);		
+		tropa.setFechaFaena(new GregorianCalendar().getTime());
+		tropa.setNumeroTropa(numeroTropa);
 
-		establecimiento.agregarTropa(this.getTropa());
-		establecimientoServicioDatabase.actualizarEstablecimiento(establecimiento);
+
+		//establecimiento.agregarTropa(tropa);
+		/*Averiguar por que con la sentencia de abajo no se guarda la tropa
+		 * tener en cuenta que:
+		 * -> a la tropa le seteamos el establecimiento
+		 * -> no agregamos la tropa a la coleccion de tropas del establecimiento 
+		 */
+		//establecimientoServicioDatabase.actualizarEstablecimiento(establecimiento);
+		tropaServicio.salvarTropa(tropa);
+		
 		numeroDeGarron = obtenerUltimoGarronDelDia();
+		
+//		long ultimoId = tropaServicio.obtenerUltimoNroDeTropa();
+//		System.out.println("El ultimo id de tropa dado es: " + ultimoId);
+//		this.setTropa(tropaServicio.obtenerTropa(new Long(ultimoId).intValue()));
 
 	}
 
 	public void imprimirEtiqueta(double peso, Categoria categoria, boolean cabezaAlMedio) {
+		long ultimoNroTropa = tropaServicio.obtenerUltimoNroDeTropa();
+		Tropa tropa = tropaServicio.obtenerTropaPorNroTropa(ultimoNroTropa);
+	
+		System.out.println("la ultima tropa guardada fue: " + tropa.getNumeroTropa());
+		
 		Animal animal = new Animal();
 		animal.setCategoria(categoria);
 		animal.setPeso(peso);
 		animal.setGarron(numeroDeGarron);
+		animal.setTropa(tropa);
 		numeroDeGarron++;
-
-		this.getTropa().agregarAnimal(animal);
-		tropaServicio.actualizar(this.getTropa());
-
+//
+//		//tropaServicio.actualizar(this.getTropa());
+		AnimalServicioDatabase animalServicioDatabase = new AnimalServicioDatabase();
+		animalServicioDatabase.salvarAnimal(animal);
+		
 		Etiqueta etiqueta = new Etiqueta();
-		etiqueta.imprimirEtiquetas(this.getTropa(), animal, cabezaAlMedio);
+		etiqueta.imprimirEtiquetas(tropa, animal, cabezaAlMedio);
 	}
 
 	public void finalizarFaena() {

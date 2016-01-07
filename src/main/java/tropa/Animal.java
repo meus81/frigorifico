@@ -1,5 +1,6 @@
 package tropa;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,9 @@ public class Animal {
 	@JoinColumn(name = "categoria_id_categoria", nullable = false, updatable = false)
 	private Categoria categoria;
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="tropa_id_tropa")
+	private Tropa tropa;
 	
 	public int getGarron() {
 		return garron;
@@ -55,6 +59,14 @@ public class Animal {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Tropa getTropa() {
+		return tropa;
+	}
+
+	public void setTropa(Tropa tropa) {
+		this.tropa = tropa;
 	}
 	
 	

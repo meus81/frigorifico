@@ -12,9 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import establecimiento.Establecimiento;
 
 @Entity
 @Table(name="tropa")
@@ -40,9 +43,12 @@ public class Tropa {
 	@Column(name="animales_recibidos")
 	private int animalesRecibidos;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST})
-	@JoinColumn(name="tropa_id_tropa",  nullable=false)
+	@OneToMany(mappedBy="tropa")
 	private List<Animal> animales;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="establecimiento_id_establecimiento")
+	private Establecimiento establecimiento;
 	
 	@Transient
 	private Set<Corral> corrales;
@@ -96,6 +102,14 @@ public class Tropa {
 		this.animalesRecibidos = animalesRecibidos;
 	}
 
+	public Establecimiento getEstablecimiento() {
+		return establecimiento;
+	}
+	
+	public void setEstablecimiento(Establecimiento establecimiento) {
+		this.establecimiento = establecimiento;
+	}
+	
 	public Set<Corral> getCorrales() {
 		return corrales;
 	}
@@ -103,7 +117,7 @@ public class Tropa {
 	public void setCorrales(Set<Corral> corrales) {
 		this.corrales = corrales;
 	}
-
+	
 	public List<Animal> getAnimales() {
 		return animales;
 	}
