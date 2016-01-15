@@ -38,22 +38,4 @@ public class TropaServicioDatabase extends ServiciosDatabase{
 		Tropa tropa = (Tropa) query.getResultList().get(0);
 		return tropa;
 	}
-	
-	public long obtenerUltimoNroDeTropa(){
-		//TODO este metodo se tiene q modificar para que funcione en base a donde provienen los animales
-		Aplicacion ap = Aplicacion.getInstance();
-		EntityManager em = ap.getEntityManager();
-
-		Query query = em.createQuery("SELECT max(numeroTropa) FROM Tropa t where YEAR(fechaFaena) = YEAR(current_date())");
-		List<Long> tropas = (List<Long>)query.getResultList();
-		Long ultimaTropa = tropas.get(0);
-		if (ultimaTropa == null)
-			ultimaTropa = 0L;
-		return ultimaTropa;
-	}
-	
-	public long obtenerSiguienteNroDeTropa(){
-		return this.obtenerUltimoNroDeTropa() + 1;
-	}
-
 }

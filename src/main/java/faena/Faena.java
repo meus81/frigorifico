@@ -37,6 +37,8 @@ public class Faena {
 		Establecimiento establecimiento = establecimientoServicioDatabase.obtenerEstablecimiento(1);
 		
 		long numeroTropa = tropaServicio.obtenerSiguienteNroDeTropa();
+		
+		
 		Tropa tropa = (new Tropa());
 		tropa.setAnimales(new ArrayList<Animal>());
 		tropa.setEstablecimiento(establecimiento);		
@@ -51,6 +53,8 @@ public class Faena {
 		 * -> no agregamos la tropa a la coleccion de tropas del establecimiento 
 		 */
 		//establecimientoServicioDatabase.actualizarEstablecimiento(establecimiento);
+		
+		
 		tropaServicio.salvarTropa(tropa);
 		
 		numeroDeGarron = obtenerUltimoGarronDelDia();
