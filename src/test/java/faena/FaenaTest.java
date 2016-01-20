@@ -6,6 +6,7 @@ import org.junit.Test;
 import servicios.CategoriaServicioDatabase;
 import servicios.TropaServicioDatabase;
 import tropa.Categoria;
+import tropa.Procedencia;
 import tropa.Tropa;
 
 public class FaenaTest {
@@ -13,6 +14,10 @@ public class FaenaTest {
 	
 	public void inicializarFaenaTest(){
 		Faena faena = new Faena();
+		//TODO Se puede usar mockito para usar una procedencia
+		Procedencia procedencia = new Procedencia();
+		procedencia.setDescripcion("Estancia");
+		
 		faena.inicializarFaena();
 		Tropa tropaFaena = faena.getTropa();
 		

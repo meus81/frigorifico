@@ -13,7 +13,7 @@ public class TropaServicioTest {
 	private Establecimiento establecimiento= null;
 	
 	@Before
-	public void crearUobtenerEstablecimiento(){
+	public void crearUObtenerEstablecimiento(){
 		EstablecimientoServicioDatabase es= new EstablecimientoServicioDatabase();
 		
 		establecimiento= es.obtenerEstablecimiento(1);

@@ -1,12 +1,10 @@
 package tropa;
 
-import java.util.GregorianCalendar;
-
 public class TropaReservada {
 
 	private int desde;
 	private int hasta;
-	private int ultima_tropa;
+	private int ultimaTropa;
 	private int anio;
 	private Procedencia procedencia;
 	
@@ -30,12 +28,12 @@ public class TropaReservada {
 		this.hasta = hasta;
 	}
 
-	public int getUltima_tropa() {
-		return ultima_tropa;
+	public int getUltimaTropa() {
+		return ultimaTropa;
 	}
 
-	public void setUltima_tropa(int ultima_tropa) {
-		this.ultima_tropa = ultima_tropa;
+	public void setUltima_tropa(int ultimaTropa) {
+		this.ultimaTropa = ultimaTropa;
 	}
 
 	public int getAnio() {
@@ -55,6 +53,15 @@ public class TropaReservada {
 	}
 	
 	public int obtenerProximaTropa(Procedencia procedencia, int anio){
-		return this.getUltima_tropa() + 1;
+		return this.getUltimaTropa() + 1;
+	}
+
+	public void obtenerSiguienteNroDeTropa() {
+		int siguienteNroDeTropa = this.getUltimaTropa() + 1;
+		if (siguienteNroDeTropa <=  this.getHasta()){
+			this.setUltima_tropa(siguienteNroDeTropa);
+		} else {
+			//TODO: Levantar un exception!!!
+		}
 	}
 }

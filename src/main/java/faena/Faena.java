@@ -8,17 +8,22 @@ import establecimiento.Establecimiento;
 import servicios.AnimalServicioDatabase;
 import servicios.EstablecimientoServicioDatabase;
 import servicios.ServiciosDatabase;
+import servicios.TropaReservadaServicioDatabase;
 import servicios.TropaServicioDatabase;
 import tropa.Animal;
 import tropa.Categoria;
+import tropa.Procedencia;
 import tropa.Tropa;
+import tropa.TropaReservada;
 
 public class Faena {
 
 
 	private int numeroDeGarron;
 	private TropaServicioDatabase tropaServicio = new TropaServicioDatabase();
-
+	private TropaReservadaServicioDatabase tropaReservadaServicio = new TropaReservadaServicioDatabase();
+	private int ultimoNroTropaReservada;
+	
 	public int getNumeroDeGarron() {
 		return numeroDeGarron;
 	}
@@ -27,24 +32,17 @@ public class Faena {
 		this.numeroDeGarron = numeroDeGarron;
 	}
 
-	public void inicializarFaena() {
-		//TODO Si la tropa se creo antes de faenar no se debe crear una nueva tropa, 
-		// se debe actualizar
-		// Como se sabe que se debe actualizar un tropa existente? porque el 
-		// usuario al momento de faenar ingresa el numero de tropa
-		
+	public void inicializarFaena(Procedencia procedencia) {
 		EstablecimientoServicioDatabase establecimientoServicioDatabase = new EstablecimientoServicioDatabase();
 		Establecimiento establecimiento = establecimientoServicioDatabase.obtenerEstablecimiento(1);
+		TropaReservada tropaReservada = tropaReservadaServicio.obtenerSiguienteNroDeTropa(procedencia);
 		
-		long numeroTropa = tropaServicio.obtenerSiguienteNroDeTropa();
-		
-		
+		ultimoNroTropaReservada = tropaReservada.getUltimaTropa();
 		Tropa tropa = (new Tropa());
 		tropa.setAnimales(new ArrayList<Animal>());
 		tropa.setEstablecimiento(establecimiento);		
 		tropa.setFechaFaena(new GregorianCalendar().getTime());
-		tropa.setNumeroTropa(numeroTropa);
-
+		tropa.setNumeroTropa(ultimoNroTropaReservada);
 
 		//establecimiento.agregarTropa(tropa);
 		/*Averiguar por que con la sentencia de abajo no se guarda la tropa
@@ -55,19 +53,14 @@ public class Faena {
 		//establecimientoServicioDatabase.actualizarEstablecimiento(establecimiento);
 		
 		
+		//FALTA SALVAR actualizar tropaReservada con su ultimo numero
+		tropaReservadaServicio.actualizar(tropaReservada);
 		tropaServicio.salvarTropa(tropa);
-		
 		numeroDeGarron = obtenerUltimoGarronDelDia();
-		
-//		long ultimoId = tropaServicio.obtenerUltimoNroDeTropa();
-//		System.out.println("El ultimo id de tropa dado es: " + ultimoId);
-//		this.setTropa(tropaServicio.obtenerTropa(new Long(ultimoId).intValue()));
-
 	}
 
 	public void imprimirEtiqueta(double peso, Categoria categoria, boolean cabezaAlMedio) {
-		long ultimoNroTropa = tropaServicio.obtenerUltimoNroDeTropa();
-		Tropa tropa = tropaServicio.obtenerTropaPorNroTropa(ultimoNroTropa);
+		Tropa tropa = tropaServicio.obtenerTropaPorNroTropa(ultimoNroTropaReservada);
 	
 		System.out.println("la ultima tropa guardada fue: " + tropa.getNumeroTropa());
 		
