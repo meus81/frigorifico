@@ -57,15 +57,10 @@ public class TropaServicioTest {
 		
 	}
 	
-	@Test
-	public void ultimaTropaTest(){
-		TropaServicioDatabase ts = new TropaServicioDatabase();
-		long ultimaTropa = ts.obtenerSiguienteNroDeTropa();
-		
-		Assert.assertTrue("La ULTIMA tropa NO es igual a 35!!!!!!!!!!!!!!!", ultimaTropa==35);
-		
-		
-	}
-
-
+	/*
+	 * antes existia el test ultima tropa
+	 * pero ya no tiene sentido porque quien asigna la ultima tropa
+	 * es la calse tropa reservada asi que el test debe estar ahi
+	 * en TropaReservadaTest
+	*/
 }

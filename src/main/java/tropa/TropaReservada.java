@@ -1,15 +1,28 @@
 package tropa;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tropa_reservada")
 public class TropaReservada {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id_tropa_reservada")
+	private int idTropaReservada;
 	private int desde;
 	private int hasta;
+	
 	private int ultimaTropa;
 	private int anio;
 	private Procedencia procedencia;
 	
 	public TropaReservada(){
-		
 	}
 
 	public int getDesde() {

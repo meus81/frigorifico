@@ -2,35 +2,48 @@ package faena;
 
 import org.junit.Assert;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 import servicios.CategoriaServicioDatabase;
+import servicios.ProcedenciaServicioDatabase;
+import servicios.TropaReservadaServicioDatabase;
 import servicios.TropaServicioDatabase;
 import tropa.Categoria;
 import tropa.Procedencia;
 import tropa.Tropa;
+import tropa.TropaReservada;
 
 public class FaenaTest {
 	
-	
+	@Test
 	public void inicializarFaenaTest(){
+		
 		Faena faena = new Faena();
-		//TODO Se puede usar mockito para usar una procedencia
-		Procedencia procedencia = new Procedencia();
-		procedencia.setDescripcion("Estancia");
 		
-		faena.inicializarFaena();
-		Tropa tropaFaena = faena.getTropa();
-		
-		TropaServicioDatabase ts= new TropaServicioDatabase();
-		long ultimaTropaBase = ts.obtenerUltimoNroDeTropa();
-		
-		Assert.assertEquals("La nueva tropa no coincide con el ultimo numero de tropa + 1!!!!!!!!!!", tropaFaena.getNumeroTropa(), ultimaTropaBase);
+		ProcedenciaServicioDatabase procedenciaServicio = new ProcedenciaServicioDatabase();
+		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1); 
+
+		TropaReservadaServicioDatabase tropaReservadaServicio = new TropaReservadaServicioDatabase();
+		TropaReservada tropaReservada = tropaReservadaServicio.obtenerUltimoNroDeTropa(procedencia);
+		int anteriorNumeroTropa = tropaReservada.getUltimaTropa();
+		faena.inicializarFaena(procedencia);
+		tropaReservada = tropaReservadaServicio.obtenerUltimoNroDeTropa(procedencia);
+		int nuevoNumeroTropa = tropaReservada.getUltimaTropa();
 	}
 	
 	@Test 
 	public void imprimirEtiquetaTest(){
+		/*Cual es la intencion de este test?
+		 * Probar que se imprimin las etiquetas
+		 * Pensar como hacer eso de mejor manera
+		 * 
+		 */
+		
 		Faena faena = new Faena();
-		faena.inicializarFaena();
+		
+		ProcedenciaServicioDatabase procedenciaServicio = new ProcedenciaServicioDatabase();
+		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1); 
+		faena.inicializarFaena(procedencia);
 		
 		CategoriaServicioDatabase categoriaServicioDatabase = new CategoriaServicioDatabase();
 		Categoria categoria = categoriaServicioDatabase.obtenerCategoria(1);
