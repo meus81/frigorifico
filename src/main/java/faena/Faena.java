@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import especie.Especie;
 import establecimiento.Establecimiento;
 import servicios.AnimalServicioDatabase;
 import servicios.EstablecimientoServicioDatabase;
@@ -32,7 +33,7 @@ public class Faena {
 		this.numeroDeGarron = numeroDeGarron;
 	}
 
-	public void inicializarFaena(Procedencia procedencia) {
+	public void inicializarFaena(Procedencia procedencia, Especie especie) {
 		EstablecimientoServicioDatabase establecimientoServicioDatabase = new EstablecimientoServicioDatabase();
 		Establecimiento establecimiento = establecimientoServicioDatabase.obtenerEstablecimiento(1);
 		TropaReservada tropaReservada = tropaReservadaServicio.obtenerSiguienteNroDeTropa(procedencia);
@@ -42,6 +43,7 @@ public class Faena {
 		tropa.setAnimales(new ArrayList<Animal>());
 		tropa.setEstablecimiento(establecimiento);		
 		tropa.setFechaFaena(new GregorianCalendar().getTime());
+		tropa.setEspecie(especie);
 		tropa.setNumeroTropa(ultimoNroTropaReservada);
 
 		//establecimiento.agregarTropa(tropa);

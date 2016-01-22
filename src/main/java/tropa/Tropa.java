@@ -14,9 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import especie.Especie;
 import establecimiento.Establecimiento;
 
 @Entity
@@ -49,6 +51,10 @@ public class Tropa {
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="establecimiento_id_establecimiento")
 	private Establecimiento establecimiento;
+	
+	@OneToOne
+	@JoinColumn(name="especie_id_especie")
+	private Especie especie;
 	
 	@Transient
 	private Set<Corral> corrales;
@@ -110,20 +116,28 @@ public class Tropa {
 		this.establecimiento = establecimiento;
 	}
 	
+	public List<Animal> getAnimales() {
+		return animales;
+	}
+	
+	public void setAnimales(List<Animal> animales) {
+		this.animales = animales;
+	}
+
+	public Especie getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(Especie especie) {
+		this.especie = especie;
+	}
+
 	public Set<Corral> getCorrales() {
 		return corrales;
 	}
 
 	public void setCorrales(Set<Corral> corrales) {
 		this.corrales = corrales;
-	}
-	
-	public List<Animal> getAnimales() {
-		return animales;
-	}
-
-	public void setAnimales(List<Animal> animales) {
-		this.animales = animales;
 	}
 
 	public DTe getDte() {

@@ -2,9 +2,13 @@ package faena;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import especie.Especie;
+
 import static org.mockito.Mockito.*;
 
 import servicios.CategoriaServicioDatabase;
+import servicios.EspecieServicioDatabase;
 import servicios.ProcedenciaServicioDatabase;
 import servicios.TropaReservadaServicioDatabase;
 import servicios.TropaServicioDatabase;
@@ -22,13 +26,17 @@ public class FaenaTest {
 		
 		ProcedenciaServicioDatabase procedenciaServicio = new ProcedenciaServicioDatabase();
 		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1); 
-
+		EspecieServicioDatabase especieServicio = new EspecieServicioDatabase();
+		Especie especie = especieServicio.obtenerEspecie(1);
+		
 		TropaReservadaServicioDatabase tropaReservadaServicio = new TropaReservadaServicioDatabase();
 		TropaReservada tropaReservada = tropaReservadaServicio.obtenerUltimoNroDeTropa(procedencia);
 		int anteriorNumeroTropa = tropaReservada.getUltimaTropa();
-		faena.inicializarFaena(procedencia);
+		faena.inicializarFaena(procedencia, especie);
 		tropaReservada = tropaReservadaServicio.obtenerUltimoNroDeTropa(procedencia);
 		int nuevoNumeroTropa = tropaReservada.getUltimaTropa();
+		
+		Assert.assertEquals("El anterior numero de tropa no es igual al nuevo-1", anteriorNumeroTropa, nuevoNumeroTropa - 1);
 	}
 	
 	@Test 
@@ -42,8 +50,11 @@ public class FaenaTest {
 		Faena faena = new Faena();
 		
 		ProcedenciaServicioDatabase procedenciaServicio = new ProcedenciaServicioDatabase();
-		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1); 
-		faena.inicializarFaena(procedencia);
+		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1);
+		
+		EspecieServicioDatabase especieServicio = new EspecieServicioDatabase();
+		Especie especie = especieServicio.obtenerEspecie(1);
+		faena.inicializarFaena(procedencia, especie);
 		
 		CategoriaServicioDatabase categoriaServicioDatabase = new CategoriaServicioDatabase();
 		Categoria categoria = categoriaServicioDatabase.obtenerCategoria(1);

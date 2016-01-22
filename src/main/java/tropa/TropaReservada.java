@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,11 +17,16 @@ public class TropaReservada {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_tropa_reservada")
 	private int idTropaReservada;
+	
+	@Column(name="ultima_tropa")
+	private int ultimaTropa;
+
 	private int desde;
 	private int hasta;
-	
-	private int ultimaTropa;
 	private int anio;
+	
+	@OneToOne
+	@JoinColumn(name="procedencia_id_procedencia")
 	private Procedencia procedencia;
 	
 	public TropaReservada(){
