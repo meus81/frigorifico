@@ -3,16 +3,16 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="frigorifico" transaction-type="RESOURCE_LOCAL"> 
-		<class>establecimiento.Establecimiento</class>
-		<class>tropa.Tropa</class>
-		<class>tropa.Animal</class>
-		<class>tropa.Categoria</class>
-		<class>tropa.Procedencia</class>
-		<class>tropa.TropaReservada</class>
+		<class>modelo.establecimiento.Establecimiento</class>
+		<class>modelo.tropa.Tropa</class>
+		<class>modelo.tropa.Animal</class>
+		<class>modelo.tropa.Categoria</class>
+		<class>modelo.tropa.Procedencia</class>
+		<class>modelo.tropa.TropaReservada</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://localhost:3306/frigorifico" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.password" value="root" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />

@@ -3,19 +3,20 @@ package faena;
 import org.junit.Assert;
 import org.junit.Test;
 
-import especie.Especie;
+import ejecutoras.faena.Faena;
+import modelo.especie.Especie;
+import modelo.tropa.Categoria;
+import modelo.tropa.Procedencia;
+import modelo.tropa.Tropa;
+import modelo.tropa.TropaReservada;
 
 import static org.mockito.Mockito.*;
 
-import servicios.CategoriaServicioDatabase;
-import servicios.EspecieServicioDatabase;
-import servicios.ProcedenciaServicioDatabase;
-import servicios.TropaReservadaServicioDatabase;
-import servicios.TropaServicioDatabase;
-import tropa.Categoria;
-import tropa.Procedencia;
-import tropa.Tropa;
-import tropa.TropaReservada;
+import servicios.CategoriaDAO;
+import servicios.EspecieDAO;
+import servicios.ProcedenciaDAO;
+import servicios.TropaReservadaDAO;
+import servicios.TropaDAO;
 
 public class FaenaTest {
 	
@@ -24,16 +25,16 @@ public class FaenaTest {
 		
 		Faena faena = new Faena();
 		
-		ProcedenciaServicioDatabase procedenciaServicio = new ProcedenciaServicioDatabase();
+		ProcedenciaDAO procedenciaServicio = new ProcedenciaDAO();
 		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1); 
-		EspecieServicioDatabase especieServicio = new EspecieServicioDatabase();
+		EspecieDAO especieServicio = new EspecieDAO();
 		Especie especie = especieServicio.obtenerEspecie(1);
 		
-		TropaReservadaServicioDatabase tropaReservadaServicio = new TropaReservadaServicioDatabase();
-		TropaReservada tropaReservada = tropaReservadaServicio.obtenerUltimoNroDeTropa(procedencia);
+		TropaReservadaDAO tropaReservadaServicio = new TropaReservadaDAO();
+		TropaReservada tropaReservada = tropaReservadaServicio.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
 		int anteriorNumeroTropa = tropaReservada.getUltimaTropa();
 		faena.inicializarFaena(procedencia, especie);
-		tropaReservada = tropaReservadaServicio.obtenerUltimoNroDeTropa(procedencia);
+		tropaReservada = tropaReservadaServicio.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
 		int nuevoNumeroTropa = tropaReservada.getUltimaTropa();
 		
 		Assert.assertEquals("El anterior numero de tropa no es igual al nuevo-1", anteriorNumeroTropa, nuevoNumeroTropa - 1);
@@ -49,14 +50,14 @@ public class FaenaTest {
 		
 		Faena faena = new Faena();
 		
-		ProcedenciaServicioDatabase procedenciaServicio = new ProcedenciaServicioDatabase();
+		ProcedenciaDAO procedenciaServicio = new ProcedenciaDAO();
 		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1);
 		
-		EspecieServicioDatabase especieServicio = new EspecieServicioDatabase();
+		EspecieDAO especieServicio = new EspecieDAO();
 		Especie especie = especieServicio.obtenerEspecie(1);
 		faena.inicializarFaena(procedencia, especie);
 		
-		CategoriaServicioDatabase categoriaServicioDatabase = new CategoriaServicioDatabase();
+		CategoriaDAO categoriaServicioDatabase = new CategoriaDAO();
 		Categoria categoria = categoriaServicioDatabase.obtenerCategoria(1);
 		faena.imprimirEtiqueta(215.20, categoria, true);
 			

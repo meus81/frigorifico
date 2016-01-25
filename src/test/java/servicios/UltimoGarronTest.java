@@ -8,7 +8,7 @@ import org.junit.Test;
 public class UltimoGarronTest {
 	@Test
 	public void ultimoGarron(){
-		ServiciosDatabase sd= new ServiciosDatabase();
+		TropaDAO tropaDAO= new TropaDAO();
 		GregorianCalendar fecha = new GregorianCalendar();
 		fecha.set(2015, Calendar.DECEMBER, 1);
 		fecha.set(Calendar.HOUR_OF_DAY, 0);
@@ -26,7 +26,7 @@ public class UltimoGarronTest {
 
 	
 		System.out.println("La FECHAAAAAAAAAAAAAAAAAAA " + fecha.getTime());
-		System.out.println("El ultimo Garron del dia " + fecha + "es: " + sd.obtenerUltimoNumeroGarron(fecha.getTime(), fecha2.getTime()));
+		System.out.println("El ultimo Garron del dia " + fecha + "es: " + tropaDAO.obtenerUltimoNumeroGarronDelDia());
 		
 	}
 	

@@ -12,9 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import excepciones.TropaInexistenteException;
-import tropa.Corral;
-import tropa.DTe;
-import tropa.Tropa;
+import modelo.establecimiento.Establecimiento;
+import modelo.tropa.Corral;
+import modelo.tropa.DTe;
+import modelo.tropa.Tropa;
 
 public class EstablecimientoTest {
 	final static Logger logger = Logger.getLogger(EstablecimientoTest.class);
