@@ -32,6 +32,7 @@ public class AnimalDAO extends DAO{
 	}
 
 	public Animal obtenerAnimalPorTropa(Tropa tropa) {
+		//TODO: cambiar este metodo a obtener animaleSSSS por tropa y devolcer la lista de animales 
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
