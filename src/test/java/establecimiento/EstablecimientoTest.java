@@ -22,7 +22,7 @@ public class EstablecimientoTest {
 	private Establecimiento establecimiento;
 
 	@Before
-	public void inicializarEstablecimiento() {
+	public void setUp() {
 		logger.debug("Estamos inicializando el @Test en el @Before");
 		establecimiento = new Establecimiento();
 
@@ -47,7 +47,7 @@ public class EstablecimientoTest {
 	}
 
 	@Test
-	public void agregarTropa() {
+	public void agregarTropaTest() {
 		logger.debug("Estamos en el @Test agregarTropa...");
 		Set<Corral> corrales = new HashSet<Corral>();
 		Corral corral4 = new Corral(4, 30);
@@ -73,14 +73,14 @@ public class EstablecimientoTest {
 	}
 
 	@Test(expected = TropaInexistenteException.class)
-	public void obtenerTropaException() throws TropaInexistenteException {
+	public void obtenerTropaExceptionTest() throws TropaInexistenteException {
 		logger.debug("Estamos en el @Test obtenerTropaException...");
 
 		establecimiento.obtenerTropa(10000);
 	}
 
 	@Test
-	public void obtenerTropa() {
+	public void obtenerTropaTest() {
 		logger.debug("Estamos en el @Test obtenerTropa...");
 
 		try {
@@ -92,14 +92,10 @@ public class EstablecimientoTest {
 	}
 
 	@Test
-	public void eliminarTropa() {
+	public void eliminarTropaTest() {
 		logger.debug("Estamos en el @Test eliminarTropa...");
-
-
 		int cantTropasInicial = establecimiento.cantidadTropas();
-
 		establecimiento.eliminarTropa(1);
-
 		int cantTropasFinal = establecimiento.cantidadTropas();
 
 		assertEquals(cantTropasInicial - 1, cantTropasFinal);

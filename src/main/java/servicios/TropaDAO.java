@@ -41,15 +41,17 @@ public class TropaDAO extends DAO{
 		return tropa;
 	}
 	
-	public int obtenerUltimoNumeroGarronDelDia() {
+	public int obtenerUltimoGarronDeUnDiaDeterminado(GregorianCalendar fecha){
 		Aplicacion ap = Aplicacion.getInstance();
 		EntityManager em = ap.getEntityManager();
 		GregorianCalendar fecha1 = new GregorianCalendar();
+		fecha1.set(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH), fecha.get(Calendar.DATE));
 		fecha1.set(Calendar.HOUR_OF_DAY, 0);
 		fecha1.set(Calendar.MINUTE, 0);
 		fecha1.set(Calendar.SECOND, 0);		
 		fecha1.set(Calendar.MILLISECOND, 0);	
 		GregorianCalendar fecha2 = new GregorianCalendar();
+		fecha2.set(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH), fecha.get(Calendar.DATE));
 		fecha2.set(Calendar.HOUR_OF_DAY, 23);
 		fecha2.set(Calendar.MINUTE, 59);		
 		fecha2.set(Calendar.SECOND, 59);
@@ -66,6 +68,10 @@ public class TropaDAO extends DAO{
 		}
 
 		return ultimoGarron;
+	}
+	
+	public int obtenerUltimoNumeroGarronDelDia() {
+		return this.obtenerUltimoGarronDeUnDiaDeterminado(new GregorianCalendar());
 	}
 	
 	public int obtenerSiguienteNumeroDeGarron() {

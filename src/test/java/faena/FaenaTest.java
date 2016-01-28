@@ -60,7 +60,7 @@ public class FaenaTest {
 		CategoriaDAO categoriaServicioDatabase = new CategoriaDAO();
 		Categoria categoria = categoriaServicioDatabase.obtenerCategoria(1);
 		faena.imprimirEtiqueta(215.20, categoria, true);
-			
+		//TODO mockear el metodo de faena test que imprime etiquetas
 	}
 	
 	@Test

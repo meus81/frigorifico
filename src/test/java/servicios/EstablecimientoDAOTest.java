@@ -6,6 +6,7 @@ import org.junit.Test;
 import modelo.establecimiento.Establecimiento;
 
 public class EstablecimientoDAOTest {
+	
 	@Test
 	public void salvarYobtenerEstablecimientoDAOTest() {
 		Establecimiento capiangos = new Establecimiento();
@@ -19,12 +20,12 @@ public class EstablecimientoDAOTest {
 		capiangos.setTelefono("(0221) 15-5574055");
 		capiangos.setTitular("El Cora");
 
-		EstablecimientoDAO es = new EstablecimientoDAO();
-		es.salvarEstablecimiento(capiangos);
-		Establecimiento establecimientoDesdeLaBBDD = es.obtenerEstablecimiento(1);
+		EstablecimientoDAO etablecimeintoDAO = new EstablecimientoDAO();
+		etablecimeintoDAO.salvarEstablecimiento(capiangos);
+		Establecimiento establecimientoDesdeLaBBDD = etablecimeintoDAO.obtenerEstablecimiento(1);
 
-		System.out.println("RESULTADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + establecimientoDesdeLaBBDD.getNombre());
-		System.out.println(capiangos.getNombre());
+//		System.out.println("RESULTADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + establecimientoDesdeLaBBDD.getNombre());
+//		System.out.println(capiangos.getNombre());
 
 		Assert.assertTrue(establecimientoDesdeLaBBDD.getNombre().equals(capiangos.getNombre()));
 		/* TODO: agregar asserts para que compare el resto de los atributos del objeto*/
@@ -37,4 +38,7 @@ public class EstablecimientoDAOTest {
 		Assert.assertNull("El establecimiento que estas pidiendo existe, por eso no es null y el test falla", e);
 	}
 
+	public void actualizarEstablecimientoTest(){
+		
+	}
 }
