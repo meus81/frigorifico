@@ -23,7 +23,7 @@ public class Etiqueta {
 
 		String datos = "Tropa: " + tropa.getNumeroTropa() + "\n Fecha Faena: " + tropa.getFechaFaena()
 				+ "\n Numero de Garron: " + animal.getGarron() + "\n Peso del animal: " + peso
-				+ "\n Categoría del animal: " + animal.getCategoria();
+				+ "\n Categoria del animal: " + animal.getCategoria();
 		
 		
 		GeneradorCodigoQR generadorCodigoQR = new GeneradorCodigoQR();		

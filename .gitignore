@@ -9,3 +9,4 @@
 /.project
 /.metadata
 /.settings/
+/src/main/webapp/WEB-INF/classes/log4j.properties
