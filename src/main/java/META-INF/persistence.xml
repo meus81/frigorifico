@@ -9,6 +9,10 @@
 		<class>modelo.tropa.Categoria</class>
 		<class>modelo.tropa.Procedencia</class>
 		<class>modelo.tropa.TropaReservada</class>
+		<class>modelo.especie.Especie</class>
+		<class>modelo.especie.Ovino</class>
+		<class>modelo.especie.Porcino</class>
+		<class>modelo.especie.Vacuno</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://localhost:3306/frigorifico" />
 			<property name="javax.persistence.jdbc.user" value="root" />
