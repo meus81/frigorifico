@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import excepciones.TropaInexistenteException;
 import modelo.tropa.Tropa;
 
@@ -40,6 +42,7 @@ public class Establecimiento {
 	private String provincia;
 	
 	@OneToMany(mappedBy="establecimiento")
+	@JsonManagedReference
 	private List<Tropa> tropas;
 
 	public Establecimiento() {

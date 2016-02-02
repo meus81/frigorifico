@@ -18,6 +18,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
 
@@ -46,10 +49,12 @@ public class Tropa {
 	private int animalesRecibidos;
 	
 	@OneToMany(mappedBy="tropa")
+	@JsonManagedReference
 	private List<Animal> animales;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="establecimiento_id_establecimiento")
+	@JsonBackReference
 	private Establecimiento establecimiento;
 	
 	@OneToOne
