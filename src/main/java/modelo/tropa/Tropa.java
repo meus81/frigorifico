@@ -1,5 +1,6 @@
 package modelo.tropa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import modelo.especie.Especie;
@@ -26,7 +28,13 @@ import modelo.establecimiento.Establecimiento;
 
 @Entity
 @Table(name="tropa")
-public class Tropa {
+public class Tropa implements Serializable{
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,11 +46,13 @@ public class Tropa {
 	
 	@Column(name="fecha_ingreso")
 	//@Temporal(TemporalType.DATE)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
 	private Date fechaIngreso;
 
 	@Column(name="fecha_faena")
 	//@Type(type="date")
 	//@Temporal(TemporalType.DATE)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
 	private Date fechaFaena;
 	
 	@Column(name="animales_recibidos")

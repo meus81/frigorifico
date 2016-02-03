@@ -16,7 +16,6 @@ import servicios.TropaDAO;
 
 @ApplicationPath("/resources")
 @Path("/")
-
 public class TropaRest {
 	@GET
 	@Path("/tropa/{id}")
@@ -31,15 +30,21 @@ public class TropaRest {
 	@Path("/tropa")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response salvarTropa(final Tropa tropa){
+	public Response salvarTropaCompleta(final Tropa tropa){
 		System.out.println("imprimo tropa: " + tropa.getNumeroTropa());
 		System.out.println("imprimo animales recibidos: " + tropa.getAnimalesRecibidos());
-		System.out.println("");
+		System.out.println("Fecha Ingreso: " + tropa.getFechaIngreso());
+		System.out.println("Fecha Faena: " + tropa.getFechaFaena());
+		System.out.println("Corrales: " + tropa.getCorrales());
+		System.out.println("Dte: " + tropa.getDte());
+		System.out.println("Especie: " + tropa.getEspecie());
+		System.out.println("Establecimiento: " + tropa.getEstablecimiento());
+		System.out.println("Animales en tropa: " + tropa.getAnimales());
 		
 		String result = "Tropa creada";
+		TropaDAO tropaDAO = new TropaDAO();
+		tropaDAO.salvarTropa(tropa);
 		return Response.status(200).entity(result).build();
 		
-		
 	}
-
 }

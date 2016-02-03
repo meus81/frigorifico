@@ -1,5 +1,6 @@
 package modelo.establecimiento;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +15,26 @@ import javax.persistence.Table;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import excepciones.TropaInexistenteException;
 import modelo.tropa.Tropa;
 
 @Entity
 @Table(name="establecimiento")
-public class Establecimiento {
+public class Establecimiento implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = Logger.getLogger(Establecimiento.class);
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_establecimiento")
+	@JsonProperty
 	private int idEstablecimiento;
 	
 	@Column(name="codigo_establecimiento")
