@@ -17,8 +17,6 @@ import servicios.TropaDAO;
 import servicios.TropaReservadaDAO;
 
 public class Faena {
-
-
 	private int numeroDeGarron;
 	private TropaDAO tropaDAO = new TropaDAO();
 	private TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
