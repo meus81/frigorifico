@@ -1,19 +1,23 @@
 package jaxrsBeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class TropaJaxrsBean {
+public class TropaJaxrsBean implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
 	
 	private int idTropa;
 	private int numeroTropa;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
 	private Date fechaIngreso;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
 	private Date fechaFaena;
 	
 	private int animalesRecibidos;
