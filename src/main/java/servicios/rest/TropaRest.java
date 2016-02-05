@@ -33,14 +33,15 @@ public class TropaRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response salvarTropaCompleta(final TropaJaxrsBean tropaJaxrsBean){
+		
 		System.out.println("imprimo tropa: " + tropaJaxrsBean.getNumeroTropa());
 		System.out.println("imprimo animales recibidos: " + tropaJaxrsBean.getAnimalesRecibidos());
 		System.out.println("Fecha Ingreso: " + tropaJaxrsBean.getFechaIngreso());
 		System.out.println("Fecha Faena: " + tropaJaxrsBean.getFechaFaena());
-		System.out.println("Corrales: " + tropaJaxrsBean.getIdCorrales());
-		System.out.println("Dte: " + tropaJaxrsBean.getIdDte());
-		System.out.println("Especie: " + tropaJaxrsBean.getIdEspecie());
-		System.out.println("Establecimiento: " + tropaJaxrsBean.getIdEstablecimiento());
+//		System.out.println("Corrales: " + tropaJaxrsBean.getIdCorrales());
+//		System.out.println("Dte: " + tropaJaxrsBean.getIdDte());
+//		System.out.println("Especie: " + tropaJaxrsBean.getIdEspecie());
+//		System.out.println("Establecimiento: " + tropaJaxrsBean.getIdEstablecimiento());
 		
 		String result = "Tropa creada";
 //		TropaDAO tropaDAO = new TropaDAO();
