@@ -21,20 +21,19 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
 
 @Entity
 @Table(name="tropa")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "idTropa")
 public class Tropa implements Serializable{
-
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,12 +58,12 @@ public class Tropa implements Serializable{
 	private int animalesRecibidos;
 	
 	@OneToMany(mappedBy="tropa")
-	@JsonManagedReference
+	@JsonBackReference	
 	private List<Animal> animales;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="establecimiento_id_establecimiento")
-	@JsonBackReference
+	@JsonManagedReference
 	private Establecimiento establecimiento;
 	
 	@OneToOne

@@ -1,5 +1,7 @@
 package modelo.tropa;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="animal")
-public class Animal {
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "idAnimal")
+public class Animal implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +36,7 @@ public class Animal {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="tropa_id_tropa")
-	@JsonBackReference
+	@JsonManagedReference
 	private Tropa tropa;
 	
 	public int getGarron() {

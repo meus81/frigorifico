@@ -10,7 +10,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import jaxrsBeans.TropaJaxrsBean;
+import org.json.JSONObject;
+
+import jaxrsBeans.JaxrsTropaBean;
 import modelo.tropa.Tropa;
 import servicios.TropaDAO;
 
@@ -29,10 +31,9 @@ public class TropaRest {
 	}
 	
 	@POST
-	@Path("/tropa")
+	@Path("/tropaJaxrsbean")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response salvarTropaCompleta(final TropaJaxrsBean tropaJaxrsBean){
+	public Response salvarTropaCompleta(final JaxrsTropaBean tropaJaxrsBean){
 		
 		System.out.println("imprimo tropa: " + tropaJaxrsBean.getNumeroTropa());
 		System.out.println("imprimo animales recibidos: " + tropaJaxrsBean.getAnimalesRecibidos());
@@ -43,10 +44,10 @@ public class TropaRest {
 //		System.out.println("Especie: " + tropaJaxrsBean.getIdEspecie());
 //		System.out.println("Establecimiento: " + tropaJaxrsBean.getIdEstablecimiento());
 		
-		String result = "Tropa creada";
+		String result = "Result: Tropa creada";
 //		TropaDAO tropaDAO = new TropaDAO();
 //		tropaDAO.salvarTropa(tropa);
-		return Response.status(200).entity(result).build();
+		return Response.status(201).entity(result).build();
 		
 	}
 }

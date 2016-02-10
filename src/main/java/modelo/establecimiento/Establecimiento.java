@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import excepciones.TropaInexistenteException;
@@ -50,7 +50,7 @@ public class Establecimiento implements Serializable{
 	private String provincia;
 	
 	@OneToMany(mappedBy="establecimiento")
-	@JsonManagedReference
+	@JsonBackReference
 	private List<Tropa> tropas;
 
 	public Establecimiento() {
