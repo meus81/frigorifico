@@ -8,7 +8,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import bean.tropa.TropaBean;
 import modelo.especie.Especie;
@@ -36,7 +35,7 @@ public class TropaRest {
 	@Path("/nueva_tropa_en_palco")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public TropaBean salvarTropaCompleta(final TropaBean tropaBean){
+	public TropaBean salvarTropaEnPalco(final TropaBean tropaBean){
 		
 		System.out.println("Numero tropa: " + tropaBean.getNumeroTropa());
 		System.out.println("Fecha Faena: " + tropaBean.getFechaFaena());
@@ -56,15 +55,12 @@ public class TropaRest {
 		tropa.setEstablecimiento(establecimiento);
 		tropa.setFechaFaena(tropaBean.getFechaFaena());
 		
-		/**TODO no hay forma de que cuando guardemos una tropa nos devuelva el id que le puso???
-		 * porque sino despues de guardarla tengo que volver a consultar*/
 		tropaDAO.salvarTropa(tropa);
 		
 		System.out.println("Despues de salvar la tropa, se le asigno el id????");
 		System.out.println(tropa.getIdTropa());
 		tropaBean.setIdTropa(tropa.getIdTropa());
 		
-		return tropaBean;
-		
+		return tropaBean;		
 	}
 }
