@@ -50,7 +50,6 @@ public class Establecimiento implements Serializable{
 	private String provincia;
 	
 	@OneToMany(mappedBy="establecimiento")
-	@JsonBackReference
 	private List<Tropa> tropas;
 
 	public Establecimiento() {

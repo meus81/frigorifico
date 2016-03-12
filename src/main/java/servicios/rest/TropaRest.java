@@ -10,10 +10,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.json.JSONObject;
-
-import jaxrsBeans.JaxrsTropaBean;
+import bean.tropa.TropaBean;
+import modelo.especie.Especie;
+import modelo.establecimiento.Establecimiento;
 import modelo.tropa.Tropa;
+import servicios.EspecieDAO;
+import servicios.EstablecimientoDAO;
 import servicios.TropaDAO;
 
 
@@ -31,23 +33,38 @@ public class TropaRest {
 	}
 	
 	@POST
-	@Path("/tropaJaxrsbean")
+	@Path("/nueva_tropa_en_palco")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response salvarTropaCompleta(final JaxrsTropaBean tropaJaxrsBean){
+	@Produces(MediaType.APPLICATION_JSON)
+	public TropaBean salvarTropaCompleta(final TropaBean tropaBean){
 		
-		System.out.println("imprimo tropa: " + tropaJaxrsBean.getNumeroTropa());
-		System.out.println("imprimo animales recibidos: " + tropaJaxrsBean.getAnimalesRecibidos());
-		System.out.println("Fecha Ingreso: " + tropaJaxrsBean.getFechaIngreso());
-		System.out.println("Fecha Faena: " + tropaJaxrsBean.getFechaFaena());
-//		System.out.println("Corrales: " + tropaJaxrsBean.getIdCorrales());
-//		System.out.println("Dte: " + tropaJaxrsBean.getIdDte());
-//		System.out.println("Especie: " + tropaJaxrsBean.getIdEspecie());
-//		System.out.println("Establecimiento: " + tropaJaxrsBean.getIdEstablecimiento());
+		System.out.println("Numero tropa: " + tropaBean.getNumeroTropa());
+		System.out.println("Fecha Faena: " + tropaBean.getFechaFaena());
+		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
+		System.out.println("Especie id: " + tropaBean.getEspecieId());
+
+		EstablecimientoDAO establecimientoDAO = new EstablecimientoDAO();
+		Establecimiento establecimiento = establecimientoDAO.obtenerEstablecimiento(tropaBean.getEstablecimientoId());
 		
-		String result = "Result: Tropa creada";
-//		TropaDAO tropaDAO = new TropaDAO();
-//		tropaDAO.salvarTropa(tropa);
-		return Response.status(201).entity(result).build();
+		EspecieDAO especieDAO = new EspecieDAO();
+		Especie especie = especieDAO.obtenerEspecie(tropaBean.getEspecieId());
+		
+		TropaDAO tropaDAO = new TropaDAO();
+		Tropa tropa = new Tropa();
+		tropa.setNumeroTropa(tropaBean.getNumeroTropa());
+		tropa.setEspecie(especie);
+		tropa.setEstablecimiento(establecimiento);
+		tropa.setFechaFaena(tropaBean.getFechaFaena());
+		
+		/**TODO no hay forma de que cuando guardemos una tropa nos devuelva el id que le puso???
+		 * porque sino despues de guardarla tengo que volver a consultar*/
+		tropaDAO.salvarTropa(tropa);
+		
+		System.out.println("Despues de salvar la tropa, se le asigno el id????");
+		System.out.println(tropa.getIdTropa());
+		tropaBean.setIdTropa(tropa.getIdTropa());
+		
+		return tropaBean;
 		
 	}
 }

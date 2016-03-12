@@ -36,7 +36,6 @@ public class Animal implements Serializable{
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="tropa_id_tropa")
-	@JsonManagedReference
 	private Tropa tropa;
 	
 	public int getGarron() {

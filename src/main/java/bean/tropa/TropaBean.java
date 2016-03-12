@@ -1,0 +1,85 @@
+package bean.tropa;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
+public class TropaBean {
+
+	private int idTropa;
+	private int numeroTropa;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
+	private Date fechaIngreso;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
+	private Date fechaFaena;
+	private int animalesRecibidos;
+	private int establecimientoId;
+	private int especieId;
+	private List<Integer> animales;
+	private Set<Integer> corralesIds;
+	private int dteId;
+	
+	public int getIdTropa() {
+		return idTropa;
+	}
+	public void setIdTropa(int idTropa) {
+		this.idTropa = idTropa;
+	}
+	public int getNumeroTropa() {
+		return numeroTropa;
+	}
+	public void setNumeroTropa(int numeroTropa) {
+		this.numeroTropa = numeroTropa;
+	}
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+	public Date getFechaFaena() {
+		return fechaFaena;
+	}
+	public void setFechaFaena(Date fechaFaena) {
+		this.fechaFaena = fechaFaena;
+	}
+	public int getAnimalesRecibidos() {
+		return animalesRecibidos;
+	}
+	public void setAnimalesRecibidos(int animalesRecibidos) {
+		this.animalesRecibidos = animalesRecibidos;
+	}
+	public int getEstablecimientoId() {
+		return establecimientoId;
+	}
+	public void setEstablecimientoId(int establecimientoId) {
+		this.establecimientoId = establecimientoId;
+	}
+	public int getEspecieId() {
+		return especieId;
+	}
+	public void setEspecieId(int especieId) {
+		this.especieId = especieId;
+	}
+	public List<Integer> getAnimales() {
+		return animales;
+	}
+	public void setAnimales(List<Integer> animales) {
+		this.animales = animales;
+	}
+	public Set<Integer> getCorralesIds() {
+		return corralesIds;
+	}
+	public void setCorralesIds(Set<Integer> corralesIds) {
+		this.corralesIds = corralesIds;
+	}
+	public int getDteId() {
+		return dteId;
+	}
+	public void setDteId(int dteId) {
+		this.dteId = dteId;
+	}
+}

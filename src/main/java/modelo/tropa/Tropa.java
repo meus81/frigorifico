@@ -19,21 +19,19 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
 
 @Entity
 @Table(name="tropa")
-@JsonIdentityInfo(
-		  generator = ObjectIdGenerators.PropertyGenerator.class,
-		  property = "idTropa")
 public class Tropa implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,13 +42,10 @@ public class Tropa implements Serializable{
 	private int numeroTropa;
 	
 	@Column(name="fecha_ingreso")
-	//@Temporal(TemporalType.DATE)
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
 	private Date fechaIngreso;
 
 	@Column(name="fecha_faena")
-	//@Type(type="date")
-	//@Temporal(TemporalType.DATE)
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
 	private Date fechaFaena;
 	
@@ -58,12 +53,10 @@ public class Tropa implements Serializable{
 	private int animalesRecibidos;
 	
 	@OneToMany(mappedBy="tropa")
-	@JsonBackReference	
 	private List<Animal> animales;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="establecimiento_id_establecimiento")
-	@JsonManagedReference
 	private Establecimiento establecimiento;
 	
 	@OneToOne
@@ -87,6 +80,14 @@ public class Tropa implements Serializable{
 		this.setCorrales(corrales);
 		this.setAnimales(new ArrayList<Animal>());
 
+	}
+
+	public int getIdTropa() {
+		return idTropa;
+	}
+
+	public void setIdTropa(int idTropa) {
+		this.idTropa = idTropa;
 	}
 
 	public int getNumeroTropa() {
