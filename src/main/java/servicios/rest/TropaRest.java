@@ -1,5 +1,7 @@
 package servicios.rest;
 
+import java.util.GregorianCalendar;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,11 +14,14 @@ import javax.ws.rs.core.MediaType;
 import bean.tropa.TropaBean;
 import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
+import modelo.tropa.Procedencia;
 import modelo.tropa.Tropa;
+import modelo.tropa.TropaReservada;
 import servicios.EspecieDAO;
 import servicios.EstablecimientoDAO;
+import servicios.ProcedenciaDAO;
 import servicios.TropaDAO;
-
+import servicios.TropaReservadaDAO;
 
 
 @ApplicationPath("/resources")
@@ -37,10 +42,9 @@ public class TropaRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public TropaBean salvarTropaEnPalco(final TropaBean tropaBean){
 		
-		System.out.println("Numero tropa: " + tropaBean.getNumeroTropa());
-		System.out.println("Fecha Faena: " + tropaBean.getFechaFaena());
 		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
 		System.out.println("Especie id: " + tropaBean.getEspecieId());
+		System.out.println("Procedencia Id: " + tropaBean.getProcendeciaId());
 
 		EstablecimientoDAO establecimientoDAO = new EstablecimientoDAO();
 		Establecimiento establecimiento = establecimientoDAO.obtenerEstablecimiento(tropaBean.getEstablecimientoId());
@@ -48,14 +52,22 @@ public class TropaRest {
 		EspecieDAO especieDAO = new EspecieDAO();
 		Especie especie = especieDAO.obtenerEspecie(tropaBean.getEspecieId());
 		
+		ProcedenciaDAO procedenciaDAO = new ProcedenciaDAO();
+		Procedencia procedencia = procedenciaDAO.obtenerProcedencia(tropaBean.getProcendeciaId());
+		
+		TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
+		TropaReservada tropaReservada = tropaReservadaDAO.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
+		int ultimoNroTropaReservada = tropaReservada.obtenerSiguienteNroDeTropa();
+
 		TropaDAO tropaDAO = new TropaDAO();
 		Tropa tropa = new Tropa();
-		tropa.setNumeroTropa(tropaBean.getNumeroTropa());
+		tropa.setNumeroTropa(ultimoNroTropaReservada);
 		tropa.setEspecie(especie);
 		tropa.setEstablecimiento(establecimiento);
-		tropa.setFechaFaena(tropaBean.getFechaFaena());
-		
+		tropa.setFechaFaena(new GregorianCalendar().getTime());
+		//averiguar como hacerlo en una transaccion
 		tropaDAO.salvarTropa(tropa);
+		tropaReservadaDAO.actualizar(tropaReservada);
 		
 		System.out.println("Despues de salvar la tropa, se le asigno el id????");
 		System.out.println(tropa.getIdTropa());

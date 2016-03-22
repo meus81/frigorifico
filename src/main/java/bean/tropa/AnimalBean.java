@@ -4,7 +4,6 @@ package bean.tropa;
 public class AnimalBean {
 
 	private int idAnimal;
-	private int garron;
 	private double peso;
 	private int idCategoria;
 	private int idTropa;
@@ -14,12 +13,6 @@ public class AnimalBean {
 	}
 	public void setIdAnimal(int idAnimal) {
 		this.idAnimal = idAnimal;
-	}
-	public int getGarron() {
-		return garron;
-	}
-	public void setGarron(int garron) {
-		this.garron = garron;
 	}
 	public double getPeso() {
 		return peso;

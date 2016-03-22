@@ -32,7 +32,15 @@ public class AnimalRest {
 		Tropa tropa = tropaDAO.obtenerTropa(animalBean.getIdTropa());
 		
 		Animal animal = new Animal();
-		animal.setGarron(animalBean.getGarron());
+		
+		/*TODO como hacemos con el numero de garron?
+		 * porque por un lado tenemos que el usuario lo puede cambiar
+		 * y por otro que el sistema le da uno mayor que el maximo
+		 * hay que vlidar que cuando tipea un nuemero de garron 
+		 * no este dado
+		 * POR AHOR NO TOMAMOS EL QUE PONE EL USUARIO
+		 * */
+		animal.setGarron(tropaDAO.obtenerSiguienteNumeroDeGarron());
 		animal.setPeso(animalBean.getPeso());
 		animal.setCategoria(categoria);
 		animal.setTropa(tropa);
