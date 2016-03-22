@@ -11,11 +11,11 @@ import modelo.tropa.Tropa;
 public class Etiqueta {
 	private static int PESO_CABEZA_ENTERA = 5;
 
-	public void imprimirEtiquetas(Tropa tropa, Animal animal, boolean cabezaAlMedio) {
+	public void imprimirEtiquetas(Tropa tropa, Animal animal) {
 		// TODO terminar de implementar este metodo
 
 		double peso;
-		if (cabezaAlMedio) {
+		if (animal.isCabezaFaenadaEntera()) {
 			peso = animal.getPeso();
 		} else {
 			peso = animal.getPeso() + PESO_CABEZA_ENTERA;

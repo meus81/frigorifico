@@ -37,6 +37,9 @@ public class Animal implements Serializable{
 	@JoinColumn(name="tropa_id_tropa")
 	private Tropa tropa;
 	
+	@Column(name="cabeza_faenada_entera")
+	private boolean cabezaFaenadaEntera;
+	
 	public int getGarron() {
 		return garron;
 	}
@@ -76,4 +79,14 @@ public class Animal implements Serializable{
 	public void setTropa(Tropa tropa) {
 		this.tropa = tropa;
 	}
+
+	public boolean isCabezaFaenadaEntera() {
+		return cabezaFaenadaEntera;
+	}
+
+	public void setCabezaFaenadaEntera(boolean cabezaFaenadaEntera) {
+		this.cabezaFaenadaEntera = cabezaFaenadaEntera;
+	}
+	
+	
 }

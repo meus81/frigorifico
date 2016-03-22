@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import bean.tropa.AnimalBean;
+import ejecutoras.faena.Etiqueta;
 import modelo.tropa.Animal;
 import modelo.tropa.Categoria;
 import modelo.tropa.Tropa;
@@ -36,17 +37,20 @@ public class AnimalRest {
 		/*TODO como hacemos con el numero de garron?
 		 * porque por un lado tenemos que el usuario lo puede cambiar
 		 * y por otro que el sistema le da uno mayor que el maximo
-		 * hay que vlidar que cuando tipea un nuemero de garron 
+		 * hay que validar que cuando tipea un nuemero de garron 
 		 * no este dado
 		 * POR AHOR NO TOMAMOS EL QUE PONE EL USUARIO
 		 * */
-		animal.setGarron(tropaDAO.obtenerSiguienteNumeroDeGarron());
-		animal.setPeso(animalBean.getPeso());
-		animal.setCategoria(categoria);
 		animal.setTropa(tropa);
+		animal.setGarron(tropaDAO.obtenerSiguienteNumeroDeGarron());
+		animal.setCategoria(categoria);
+		animal.setPeso(animalBean.getPeso());
+		animal.setCabezaFaenadaEntera(animalBean.isCabezaFaenadaEntera());
 		
 		AnimalDAO animalDAO = new AnimalDAO();
 		animalDAO.salvarAnimal(animal);
+		Etiqueta etiqueta = new Etiqueta();
+		etiqueta.imprimirEtiquetas(tropa, animal);
 		
 		animalBean.setIdAnimal(animal.getIdAnimal());
 		return animalBean;

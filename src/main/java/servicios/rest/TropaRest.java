@@ -69,8 +69,6 @@ public class TropaRest {
 		tropaDAO.salvarTropa(tropa);
 		tropaReservadaDAO.actualizar(tropaReservada);
 		
-		System.out.println("Despues de salvar la tropa, se le asigno el id????");
-		System.out.println(tropa.getIdTropa());
 		tropaBean.setIdTropa(tropa.getIdTropa());
 		
 		return tropaBean;		

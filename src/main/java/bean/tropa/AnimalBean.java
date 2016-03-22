@@ -7,6 +7,7 @@ public class AnimalBean {
 	private double peso;
 	private int idCategoria;
 	private int idTropa;
+	private boolean cabezaFaenadaEntera;
 	
 	public int getIdAnimal() {
 		return idAnimal;
@@ -31,5 +32,11 @@ public class AnimalBean {
 	}
 	public void setIdTropa(int idTropa) {
 		this.idTropa = idTropa;
+	}
+	public boolean isCabezaFaenadaEntera() {
+		return cabezaFaenadaEntera;
+	}
+	public void setCabezaFaenadaEntera(boolean cabezaEntera) {
+		this.cabezaFaenadaEntera = cabezaEntera;
 	}
 }
