@@ -73,4 +73,16 @@ public class TropaRest {
 		
 		return tropaBean;		
 	}
+	
+	@POST
+	@Path("/nueva_tropa")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public TropaBean salvarTropa(final TropaBean tropaBean){
+		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
+		System.out.println("Especie id: " + tropaBean.getEspecieId());
+		
+		tropaBean.setIdTropa(100);
+		return tropaBean;
+	}
 }
