@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
+import com.google.gson.Gson;
 
 public class TropaBean {
 
@@ -84,5 +84,11 @@ public class TropaBean {
 	}
 	public void setDteId(int dteId) {
 		this.dteId = dteId;
+	}
+	
+	@Override
+	public String toString(){
+		Gson gson = new Gson();
+		return gson.toJson(this);
 	}
 }

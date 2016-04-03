@@ -132,6 +132,13 @@
 			<artifactId>json</artifactId>
 			<version>20140107</version>
 		</dependency>
+
+		<!-- Google Json otra libreria para manejar json mas facilmente -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.6.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

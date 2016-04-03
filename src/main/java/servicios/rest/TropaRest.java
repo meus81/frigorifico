@@ -2,6 +2,7 @@ package servicios.rest;
 
 import java.util.GregorianCalendar;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,6 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import bean.tropa.TropaBean;
@@ -27,6 +29,7 @@ import servicios.TropaReservadaDAO;
 @ApplicationPath("/resources")
 @Path("/")
 public class TropaRest {
+	
 	@GET
 	@Path("/tropa/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,11 +81,23 @@ public class TropaRest {
 	@Path("/nueva_tropa")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public TropaBean salvarTropa(final TropaBean tropaBean){
+	public TropaBean salvarTropa(final TropaBean tropaBean, @Context HttpServletResponse response){
 		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
 		System.out.println("Especie id: " + tropaBean.getEspecieId());
 		
 		tropaBean.setIdTropa(100);
+		System.out.println(tropaBean);
 		return tropaBean;
+//		return Response
+//				.status(200)
+//				.header("Access-Control-Allow-Origin", "*")
+//				.header("Access-Control-Allow-Headers",
+//				        "origin, content-type, accept, authorization")
+//				.header("Access-Control-Allow-Credentials", "true")
+//				.header("Access-Control-Allow-Methods",
+//				        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+//				.header("Access-Control-Max-Age", "1209600")
+//				.entity(tropaBean)
+//				.build();
 	}
 }

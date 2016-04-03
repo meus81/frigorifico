@@ -33,15 +33,13 @@
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
 			<param-value>servicios.rest, com.jersey.jaxb,
-				com.fasterxml.jackson.jaxrs.json
+				com.fasterxml.jackson.jaxrs.json, configuracion
 			</param-value>
 		</init-param>
-<!-- 		<init-param>
-			<param-name>jersey.config.server.provider.classnames</param-name>
-			<param-value>
-				com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider
-			</param-value>
-		</init-param> -->
+		<!-- <init-param> <param-name>jersey.config.server.provider.classnames</param-name> 
+			<param-value> com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider </param-value> 
+			</init-param> -->
+		
 		<init-param>
 			<param-name>unit:WidgetPU</param-name>
 			<param-value>persistence/widget</param-value>

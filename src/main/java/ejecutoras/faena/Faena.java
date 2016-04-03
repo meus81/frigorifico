@@ -65,7 +65,7 @@ public class Faena {
 		animalServicioDatabase.salvarAnimal(animal);
 		
 		Etiqueta etiqueta = new Etiqueta();
-		etiqueta.imprimirEtiquetas(tropa, animal, cabezaAlMedio);
+		etiqueta.imprimirEtiquetas(tropa, animal);
 	}
 
 	public void finalizarFaena() {
