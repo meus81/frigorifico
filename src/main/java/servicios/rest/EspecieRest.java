@@ -1,5 +1,7 @@
 package servicios.rest;
 
+import java.util.List;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -22,4 +24,14 @@ public class EspecieRest {
 		EspecieDAO especieDAO = new EspecieDAO();
 		return especieDAO.obtenerEspecie(id);
 	}
+
+	@GET
+	@Path("/especies")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Especie> getEspecies(){
+		System.out.println("invocando el servicio para obtener todas las especies");
+		EspecieDAO especieDAO = new EspecieDAO();
+		return especieDAO.obtenerEspecies();
+	}
+	
 }
