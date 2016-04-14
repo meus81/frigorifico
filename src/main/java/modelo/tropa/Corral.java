@@ -2,12 +2,32 @@ package modelo.tropa;
 
 import java.util.GregorianCalendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="corral")
 public class Corral {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id_corral")
+	private int idCorral;
 	
 	private int numero;
 	private int capacidad;
 	private int ocupacion;
+	
+	@Column(name="fecha_egreso")
 	private GregorianCalendar fechaEgreso;
+	
+	public Corral(){
+		
+	}
 	
 	public Corral(int numero, int capacidad) {
 		this.setNumero(numero);

@@ -63,8 +63,10 @@ public class Tropa implements Serializable{
 	@JoinColumn(name="especie_id_especie")
 	private Especie especie;
 	
-	@Transient
+	@OneToOne
+	@JoinColumn(name="")
 	private Set<Corral> corrales;
+	
 	@Transient
 	private DTe dte;
 	
