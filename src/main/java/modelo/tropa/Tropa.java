@@ -3,12 +3,14 @@ package modelo.tropa;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +27,8 @@ import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
 
 @Entity
-@Table(name="tropa")
-public class Tropa implements Serializable{
+@Table(name = "tropa")
+public class Tropa implements Serializable {
 
 	/**
 	 * 
@@ -35,46 +37,45 @@ public class Tropa implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_tropa")
+	@Column(name = "id_tropa", nullable= false)
 	private int idTropa;
-	
-	@Column(name="numero_tropa")
+
+	@Column(name = "numero_tropa")
 	private int numeroTropa;
-	
-	@Column(name="fecha_ingreso")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
+
+	@Column(name = "fecha_ingreso")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-AR", timezone = "America/Argentina/Buenos_Aires")
 	private Date fechaIngreso;
 
-	@Column(name="fecha_faena")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS", locale="es-AR", timezone="America/Argentina/Buenos_Aires")
+	@Column(name = "fecha_faena")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", locale = "es-AR", timezone = "America/Argentina/Buenos_Aires")
 	private Date fechaFaena;
-	
-	@Column(name="animales_recibidos")
+
+	@Column(name = "animales_recibidos")
 	private int animalesRecibidos;
-	
-	@OneToMany(mappedBy="tropa")
+
+	@OneToMany(mappedBy = "tropa")
 	private List<Animal> animales;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="establecimiento_id_establecimiento")
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "establecimiento_id_establecimiento")
 	private Establecimiento establecimiento;
-	
+
 	@OneToOne
-	@JoinColumn(name="especie_id_especie")
+	@JoinColumn(name = "especie_id_especie")
 	private Especie especie;
-	
-	@OneToOne
-	@JoinColumn(name="")
-	private Set<Corral> corrales;
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="tropa",  cascade = CascadeType.ALL)
+	private Set<TropaCorral> corrales = new HashSet<TropaCorral>();
+
 	@Transient
 	private DTe dte;
-	
-	public Tropa(){
-		
+
+	public Tropa() {
+
 	}
-	
-	public Tropa(int numeroTropa, int animalesRecibidos, DTe dte, Set<Corral> corrales) {
+
+	public Tropa(int numeroTropa, int animalesRecibidos, DTe dte, Set<TropaCorral> corrales) {
 		this.setNumeroTropa(numeroTropa);
 		this.setAnimalesRecibidos(animalesRecibidos);
 		this.setDte(dte);
@@ -127,15 +128,15 @@ public class Tropa implements Serializable{
 	public Establecimiento getEstablecimiento() {
 		return establecimiento;
 	}
-	
+
 	public void setEstablecimiento(Establecimiento establecimiento) {
 		this.establecimiento = establecimiento;
 	}
-	
+
 	public List<Animal> getAnimales() {
 		return animales;
 	}
-	
+
 	public void setAnimales(List<Animal> animales) {
 		this.animales = animales;
 	}
@@ -148,11 +149,11 @@ public class Tropa implements Serializable{
 		this.especie = especie;
 	}
 
-	public Set<Corral> getCorrales() {
+	public Set<TropaCorral> getCorrales() {
 		return corrales;
 	}
 
-	public void setCorrales(Set<Corral> corrales) {
+	public void setCorrales(Set<TropaCorral> corrales) {
 		this.corrales = corrales;
 	}
 
@@ -163,8 +164,8 @@ public class Tropa implements Serializable{
 	public void setDte(DTe dte) {
 		this.dte = dte;
 	}
-	
-	public void agregarAnimal(Animal animal){
+
+	public void agregarAnimal(Animal animal) {
 		this.getAnimales().add(animal);
 	}
 

@@ -67,12 +67,13 @@ public class TropaRest {
 		tropa.setNumeroTropa(ultimoNroTropaReservada);
 		tropa.setEspecie(especie);
 		tropa.setEstablecimiento(establecimiento);
+		tropa.setAnimalesRecibidos(tropaBean.getAnimalesRecibidos());
 		tropa.setFechaFaena(new GregorianCalendar().getTime());
 		//averiguar como hacerlo en una transaccion
 		tropaDAO.salvarTropa(tropa);
 		tropaReservadaDAO.actualizar(tropaReservada);
-		
 		tropaBean.setIdTropa(tropa.getIdTropa());
+		tropaBean.setNumeroTropa(ultimoNroTropaReservada);
 		
 		return tropaBean;		
 	}

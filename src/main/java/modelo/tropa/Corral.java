@@ -1,6 +1,6 @@
 package modelo.tropa;
 
-import java.util.GregorianCalendar;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="corral")
-public class Corral {
+public class Corral implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,10 +20,6 @@ public class Corral {
 	
 	private int numero;
 	private int capacidad;
-	private int ocupacion;
-	
-	@Column(name="fecha_egreso")
-	private GregorianCalendar fechaEgreso;
 	
 	public Corral(){
 		
@@ -40,29 +36,11 @@ public class Corral {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
+	
 	public int getCapacidad() {
 		return capacidad;
 	}
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
 	}
-
-	public int getOcupacion() {
-		return ocupacion;
-	}
-
-	public void setOcupacion(int ocupacion) {
-		this.ocupacion = ocupacion;
-	}
-
-	public GregorianCalendar getFechaEgreso() {
-		return fechaEgreso;
-	}
-
-	public void setFechaEgreso(GregorianCalendar fechaEgreso) {
-		this.fechaEgreso = fechaEgreso;
-	}
-	
-	
-
 }

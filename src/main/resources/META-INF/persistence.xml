@@ -13,6 +13,8 @@
 		<class>modelo.especie.Ovino</class>
 		<class>modelo.especie.Porcino</class>
 		<class>modelo.especie.Vacuno</class>
+		<class>modelo.tropa.Corral</class>
+		<class>modelo.tropa.TropaCorral</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://localhost:3306/frigorifico" />
 			<property name="javax.persistence.jdbc.user" value="root" />
