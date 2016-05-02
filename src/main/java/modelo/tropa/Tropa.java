@@ -66,7 +66,7 @@ public class Tropa implements Serializable {
 	private Especie especie;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="tropa",  cascade = CascadeType.ALL)
-	private Set<TropaCorral> corrales = new HashSet<TropaCorral>();
+	private Set<TropaCorral> corrales;
 
 	@Transient
 	private DTe dte;
@@ -75,15 +75,25 @@ public class Tropa implements Serializable {
 
 	}
 
-	public Tropa(int numeroTropa, int animalesRecibidos, DTe dte, Set<TropaCorral> corrales) {
+	public Tropa(int numeroTropa, int animalesRecibidos, Date fechaIngreso, DTe dte, Set<TropaCorral> tropaCorrales, Especie especie) {
 		this.setNumeroTropa(numeroTropa);
 		this.setAnimalesRecibidos(animalesRecibidos);
 		this.setDte(dte);
-		this.setFechaIngreso(new Date());
+		this.setFechaIngreso(fechaIngreso);
 		this.setCorrales(corrales);
 		this.setAnimales(new ArrayList<Animal>());
-
+		this.setEspecie(especie);
+		this.setCorrales(tropaCorrales);
 	}
+	
+	public Tropa(int numeroTropa, Date fechaFaena, Especie especie){
+		this.setNumeroTropa(numeroTropa);
+		this.setFechaFaena(fechaFaena);
+		this.setCorrales(new HashSet<TropaCorral>());
+		this.setAnimales(new ArrayList<Animal>());
+		this.setEspecie(especie);
+	}
+	
 
 	public int getIdTropa() {
 		return idTropa;
@@ -169,4 +179,11 @@ public class Tropa implements Serializable {
 		this.getAnimales().add(animal);
 	}
 
+	public Integer cantidadAnimales(){
+		return this.getAnimales().size();
+	}
+	
+	public Integer cantidadCorrales(){
+		return this.getCorrales().size();
+	}
 }

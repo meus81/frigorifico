@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,13 +23,19 @@ public class Corral implements Serializable{
 	private int numero;
 	private int capacidad;
 	
+	@OneToOne
+	@JoinColumn(name = "estado_id_estado")
+	private EstadoCorral estado;
+	
+	
 	public Corral(){
 		
 	}
 	
-	public Corral(int numero, int capacidad) {
+	public Corral(int numero, int capacidad, EstadoCorral estadoCorral) {
 		this.setNumero(numero);
 		this.setCapacidad(capacidad);
+		this.setEstado(estadoCorral);
 	}
 	
 	public int getNumero() {
@@ -42,5 +50,22 @@ public class Corral implements Serializable{
 	}
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
+	}
+
+	public EstadoCorral getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoCorral estado) {
+		this.estado = estado;
+	}
+
+	public void cambiarLibreAOcupado() {
+		this.setEstado(new Ocupado());
+		
+	}
+
+	public boolean puedeGuardarAnimales() {
+		return this.getEstado().puedeGuardarAnimales();
 	}
 }

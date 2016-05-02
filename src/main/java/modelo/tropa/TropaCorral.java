@@ -13,6 +13,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import excepciones.CorralNoDisponibleParaGuardarAnimalesException;
+import excepciones.MayorCantidadAnimalesQueCapacidadCorralException;
+
 @Entity
 @Table(name="tropa_corral")
 @IdClass(TropaCorralId.class)
@@ -43,8 +46,19 @@ public class TropaCorral implements Serializable{
 		return ocupacion;
 	}
 
-	public void setOcupacion(int ocupacion) {
-		this.ocupacion = ocupacion;
+	public void setOcupacion(int ocupacion)
+			throws MayorCantidadAnimalesQueCapacidadCorralException, CorralNoDisponibleParaGuardarAnimalesException {
+		if (ocupacion <= this.getCorral().getCapacidad()){
+			if (this.getCorral().puedeGuardarAnimales()) {
+				this.ocupacion = ocupacion;
+				this.getCorral().cambiarLibreAOcupado();
+			}
+			else {
+				throw new CorralNoDisponibleParaGuardarAnimalesException();
+			}
+		} else{
+			throw new MayorCantidadAnimalesQueCapacidadCorralException();
+		}
 	}
 
 	public Date getFechaEgreso() {

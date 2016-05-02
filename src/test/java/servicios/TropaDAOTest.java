@@ -9,11 +9,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.gson.Gson;
+
 import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
 import modelo.tropa.Animal;
 import modelo.tropa.Procedencia;
 import modelo.tropa.Tropa;
+import modelo.tropa.TropaCorral;
 import modelo.tropa.TropaReservada;
 
 public class TropaDAOTest {
@@ -125,4 +128,19 @@ public class TropaDAOTest {
 	public void obtenerSiguienteNumeroDeGarronTest(){
 		
 	}
+	
+	@Test
+	public void obtenerTropa(){
+		TropaDAO tropaDAO =  new TropaDAO();
+		
+		Tropa tropa = tropaDAO.obtenerTropa(60);
+		
+		Gson gson = new Gson();
+//		System.out.println(gson.toJson(tropa));
+		for (TropaCorral tropaCorral : tropa.getCorrales()) {
+			System.out.println("TropaCorral: " + tropaCorral.getFechaEgreso() + "- Ocupacion: "+ tropaCorral.getOcupacion() + 
+								"- Numero corral: " + tropaCorral.getCorral().getNumero() + "- Estado: " + tropaCorral.getCorral().getEstado());
+		}
+	}
+	
 }
