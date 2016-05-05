@@ -32,6 +32,9 @@ public class TropaReservadaDAO extends DAO {
 			// ERROR
 		} else {
 			tropaReservadaResultado = tropas.get(0);
+			System.out.println("TROPA RESULTADO POR PRCEDENCIA============" + tropaReservadaResultado.getAnio() + 
+			"DESDE: " + tropaReservadaResultado.getDesde() + "Hasta: " + tropaReservadaResultado.getHasta() + 
+			" Ultima tropaaaaa " + tropaReservadaResultado.getUltimaTropa() );
 		}
 		return tropaReservadaResultado;
 	}
