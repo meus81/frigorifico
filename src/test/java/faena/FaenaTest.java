@@ -4,11 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ejecutoras.faena.Faena;
-import modelo.especie.Especie;
-import modelo.tropa.Categoria;
-import modelo.tropa.Procedencia;
-import modelo.tropa.Tropa;
-import modelo.tropa.TropaReservada;
+import especie.Especie;
 
 import static org.mockito.Mockito.*;
 
@@ -16,6 +12,10 @@ import servicios.CategoriaDAO;
 import servicios.EspecieDAO;
 import servicios.ProcedenciaDAO;
 import servicios.TropaReservadaDAO;
+import tropa.Categoria;
+import tropa.Procedencia;
+import tropa.Tropa;
+import tropa.TropaReservada;
 import servicios.TropaDAO;
 
 public class FaenaTest {

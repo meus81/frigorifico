@@ -3,7 +3,7 @@ package servicios;
 import org.junit.Assert;
 import org.junit.Test;
 
-import modelo.establecimiento.Establecimiento;
+import establecimiento.Establecimiento;
 
 public class EstablecimientoDAOTest {
 	

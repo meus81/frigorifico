@@ -9,12 +9,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import modelo.especie.Especie;
-import modelo.establecimiento.Establecimiento;
-import modelo.tropa.Animal;
-import modelo.tropa.Procedencia;
-import modelo.tropa.Tropa;
-import modelo.tropa.TropaReservada;
+import especie.Especie;
+import establecimiento.Establecimiento;
+import tropa.Animal;
+import tropa.Procedencia;
+import tropa.Tropa;
+import tropa.TropaReservada;
 
 public class TropaDAOTest {
 	private Establecimiento establecimiento = null;

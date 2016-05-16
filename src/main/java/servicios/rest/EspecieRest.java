@@ -9,7 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import modelo.especie.Especie;
+import especie.Especie;
 import servicios.EspecieDAO;
 
 @ApplicationPath("/resources")

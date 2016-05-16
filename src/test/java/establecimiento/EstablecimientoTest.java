@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
+import establecimiento.Establecimiento;
 import excepciones.TropaInexistenteException;
-import modelo.establecimiento.Establecimiento;
-import modelo.tropa.Corral;
-import modelo.tropa.DTe;
-import modelo.tropa.Tropa;
+import tropa.Corral;
+import tropa.DTe;
+import tropa.Tropa;
 
 public class EstablecimientoTest {
 	final static Logger logger = Logger.getLogger(EstablecimientoTest.class);
