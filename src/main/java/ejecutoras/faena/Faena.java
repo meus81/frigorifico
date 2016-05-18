@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import modelo.especie.Especie;
-import modelo.establecimiento.Establecimiento;
-import modelo.tropa.Animal;
-import modelo.tropa.Categoria;
-import modelo.tropa.Procedencia;
-import modelo.tropa.Tropa;
-import modelo.tropa.TropaReservada;
+import especie.Especie;
+import establecimiento.Establecimiento;
 import servicios.AnimalDAO;
 import servicios.EstablecimientoDAO;
 import servicios.TropaDAO;
 import servicios.TropaReservadaDAO;
+import tropa.Animal;
+import tropa.Categoria;
+import tropa.Procedencia;
+import tropa.Tropa;
+import tropa.TropaReservada;
 
 public class Faena {
 	private int numeroDeGarron;
