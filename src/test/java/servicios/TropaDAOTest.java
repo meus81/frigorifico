@@ -1,16 +1,21 @@
 package servicios;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import configuracion.Aplicacion;
 import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
 import modelo.tropa.Animal;
@@ -20,10 +25,28 @@ import modelo.tropa.TropaCorral;
 import modelo.tropa.TropaReservada;
 
 public class TropaDAOTest {
-	private Establecimiento establecimiento = null;
-
-	@Before
-	public void setUp() {
+	private static Establecimiento establecimiento = null;
+	private static Logger logger = Logger.getLogger(TropaDAOTest.class.getName());
+	private static Connection connection;
+	
+	@BeforeClass
+	public static void setUp() {
+		try {
+			logger.info("Startingemory HSQL database for unit tests");
+			Class.forName("org.hsqldb.jdbcDriver");
+			connection = DriverManager.getConnection("jdbc:hsqldb:mem:unit-testing-jpa", "sa", "");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail("Exception during HSQL database startup.");
+		}
+		try {
+			logger.info("BuildingEntityManager for unit tests");
+			Aplicacion.setEntityManagerFactoryForTest();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail("Exception during JPA EntityManager instanciation.");
+		}
+		
 		EstablecimientoDAO es = new EstablecimientoDAO();
 		establecimiento = es.obtenerEstablecimiento(1);
 
@@ -41,6 +64,13 @@ public class TropaDAOTest {
 			es.salvarEstablecimiento(capiangos);
 			establecimiento = capiangos;
 		}
+		
+	}
+
+	@AfterClass
+	public static void tearDown() throws Exception {
+		logger.info("Shuting Hibernate JPA layer.");
+		Aplicacion.closeEntityManagerFactoryForTest();
 	}
 
 	@Test

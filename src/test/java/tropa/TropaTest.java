@@ -31,14 +31,14 @@ public class TropaTest {
 		// No cantidad de animales
 		// No se asigna corral
 		// Si fecha de egreso
-		Date today = new Date();
+		Date hoy = new Date();
 		Especie especie = new Ovino();
 		int numeroDeTropa = 9;
 
-		Tropa tropa = new Tropa(numeroDeTropa, today, especie);
+		Tropa tropa = new Tropa(numeroDeTropa, hoy, especie);
 
 		Assert.assertEquals("Numero de tropas DISTINTO", numeroDeTropa, tropa.getNumeroTropa());
-		Assert.assertEquals("Las fechas de faena son disntintas", today, tropa.getFechaFaena());
+		Assert.assertEquals("Las fechas de faena son disntintas", hoy, tropa.getFechaFaena());
 		Assert.assertEquals("La especie asignada a la tropa NO es igual", especie.getDescripcion(),
 				tropa.getEspecie().getDescripcion());
 		Assert.assertTrue(tropa.cantidadAnimales() == 0);

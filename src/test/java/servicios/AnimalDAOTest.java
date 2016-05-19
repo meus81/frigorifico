@@ -1,11 +1,16 @@
 package servicios;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.GregorianCalendar;
 
+import org.apache.log4j.Logger;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import configuracion.Aplicacion;
 import modelo.especie.Especie;
 import modelo.establecimiento.Establecimiento;
 import modelo.tropa.Animal;
@@ -16,10 +21,28 @@ import modelo.tropa.TropaReservada;
 
 public class AnimalDAOTest {
 
-	private Tropa tropa = null;
+	private static Tropa tropa = null;
+	private static Logger logger = Logger.getLogger(AnimalDAOTest.class.getName());
+	private static Connection connection;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
+		try {
+			logger.info("Startingemory HSQL database for unit tests");
+			Class.forName("org.hsqldb.jdbcDriver");
+			connection = DriverManager.getConnection("jdbc:hsqldb:mem:unit-testing-jpa", "sa", "");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail("Exception during HSQL database startup.");
+		}
+		try {
+			logger.info("BuildingEntityManager for unit tests");
+			Aplicacion.setEntityManagerFactoryForTest();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail("Exception during JPA EntityManager instanciation.");
+		}
+		
 		EstablecimientoDAO es = new EstablecimientoDAO();
 		Establecimiento establecimiento = es.obtenerEstablecimiento(1);
 		if (establecimiento == null) {
@@ -58,6 +81,12 @@ public class AnimalDAOTest {
 		trDAO.salvarTropa(tropa1);
 
 		tropa = trDAO.obtenerTropaPorNroTropa(tropa1.getNumeroTropa());
+	}
+	
+	@AfterClass
+	public static void tearDown() throws Exception {
+		logger.info("Shuting Hibernate JPA layer.");
+		Aplicacion.closeEntityManagerFactoryForTest();
 	}
 
 	@Test

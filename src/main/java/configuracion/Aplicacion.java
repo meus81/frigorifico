@@ -30,4 +30,26 @@ public class Aplicacion {
 	public void closeEntityManagerFactory(){
 		_instance.emf.close();
 	}
+	
+	public static void setEntityManagerFactoryForTest(){
+		System.out.println("============================");
+		System.out.println("============================");
+		System.out.println("============================");
+		System.out.println("ENTREEEEEEEEEEEEEEEEEEE");
+		if (_instance == null){
+			_instance = new Aplicacion();
+			
+		}
+		_instance.emf = Persistence.createEntityManagerFactory("frigorifico-test");
+		_instance.em = _instance.emf.createEntityManager();
+	}
+	
+	public static void closeEntityManagerFactoryForTest(){
+		if (_instance.em != null) {
+			_instance.em.close();
+		}
+		if (_instance.emf != null) {
+			_instance.emf.close();
+		}
+	}
 }

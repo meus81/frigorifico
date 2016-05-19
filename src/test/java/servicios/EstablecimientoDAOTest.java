@@ -1,12 +1,56 @@
 package servicios;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
+import javax.persistence.PersistenceContext;
+
+import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
+
+import com.sun.research.ws.wadl.Application;
+
+import configuracion.Aplicacion;
 import modelo.establecimiento.Establecimiento;
 
+@PersistenceContext(name = "frigorifico-test")
 public class EstablecimientoDAOTest {
-	
+
+	private static Logger logger = Logger.getLogger(EstablecimientoDAOTest.class.getName());
+	private static Connection connection;
+
+	@BeforeClass
+	public static void setUp() throws Exception {
+		
+		try {
+			logger.info("Startingemory HSQL database for unit tests");
+			Class.forName("org.hsqldb.jdbcDriver");
+			connection = DriverManager.getConnection("jdbc:hsqldb:mem:unit-testing-jpa", "sa", "");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail("Exception during HSQL database startup.");
+		}
+		try {
+			logger.info("BuildingEntityManager for unit tests");
+			Aplicacion.setEntityManagerFactoryForTest();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail("Exception during JPA EntityManager instanciation.");
+		}
+	}
+
+	@AfterClass
+	public static void tearDown() throws Exception {
+		logger.info("Shuting Hibernate JPA layer.");
+		Aplicacion.closeEntityManagerFactoryForTest();
+	}
+
 	@Test
 	public void salvarYobtenerEstablecimientoDAOTest() {
 		Establecimiento capiangos = new Establecimiento();
@@ -24,11 +68,15 @@ public class EstablecimientoDAOTest {
 		etablecimeintoDAO.salvarEstablecimiento(capiangos);
 		Establecimiento establecimientoDesdeLaBBDD = etablecimeintoDAO.obtenerEstablecimiento(1);
 
-//		System.out.println("RESULTADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + establecimientoDesdeLaBBDD.getNombre());
-//		System.out.println(capiangos.getNombre());
+		// System.out.println("RESULTADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" +
+		// establecimientoDesdeLaBBDD.getNombre());
+		// System.out.println(capiangos.getNombre());
 
 		Assert.assertTrue(establecimientoDesdeLaBBDD.getNombre().equals(capiangos.getNombre()));
-		/* TODO: agregar asserts para que compare el resto de los atributos del objeto*/
+		/*
+		 * TODO: agregar asserts para que compare el resto de los atributos del
+		 * objeto
+		 */
 	}
 
 	@Test
@@ -38,7 +86,7 @@ public class EstablecimientoDAOTest {
 		Assert.assertNull("El establecimiento que estas pidiendo existe, por eso no es null y el test falla", e);
 	}
 
-	public void actualizarEstablecimientoTest(){
-		
+	public void actualizarEstablecimientoTest() {
+
 	}
 }
