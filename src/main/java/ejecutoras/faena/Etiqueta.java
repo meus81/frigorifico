@@ -5,8 +5,8 @@ import java.io.File;
 import ejecutoras.qrCode.GeneradorCodigoQR;
 import ejecutoras.qrCode.GeneradorEtiqueta;
 import ejecutoras.qrCode.MedioImpresionImpresoraComun;
-import modelo.tropa.Animal;
-import modelo.tropa.Tropa;
+import tropa.Animal;
+import tropa.Tropa;
 
 public class Etiqueta {
 	private static int PESO_CABEZA_ENTERA = 5;

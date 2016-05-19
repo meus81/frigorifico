@@ -9,9 +9,9 @@ import javax.ws.rs.core.MediaType;
 
 import bean.tropa.AnimalBean;
 import ejecutoras.faena.Etiqueta;
-import modelo.tropa.Animal;
-import modelo.tropa.Categoria;
-import modelo.tropa.Tropa;
+import tropa.Animal;
+import tropa.Categoria;
+import tropa.Tropa;
 import servicios.AnimalDAO;
 import servicios.CategoriaDAO;
 import servicios.TropaDAO;

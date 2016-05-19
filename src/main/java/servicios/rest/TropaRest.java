@@ -14,11 +14,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import bean.tropa.TropaBean;
-import modelo.especie.Especie;
-import modelo.establecimiento.Establecimiento;
-import modelo.tropa.Procedencia;
-import modelo.tropa.Tropa;
-import modelo.tropa.TropaReservada;
+import especie.Especie;
+import establecimiento.Establecimiento;
+import tropa.Procedencia;
+import tropa.Tropa;
+import tropa.TropaReservada;
 import servicios.EspecieDAO;
 import servicios.EstablecimientoDAO;
 import servicios.ProcedenciaDAO;
