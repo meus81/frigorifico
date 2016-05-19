@@ -72,7 +72,6 @@ public class TropaRest {
 		//averiguar como hacerlo en una transaccion
 		tropaDAO.salvarTropa(tropa);
 		tropaReservadaDAO.actualizar(tropaReservada);
-		
 		tropaBean.setIdTropa(tropa.getIdTropa());
 		tropaBean.setNumeroTropa(ultimoNroTropaReservada);
 		
