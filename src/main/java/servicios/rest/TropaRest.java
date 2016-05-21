@@ -45,9 +45,6 @@ public class TropaRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public TropaBean salvarTropaEnPalco(final TropaBean tropaBean){
 		
-		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
-		System.out.println("Especie id: " + tropaBean.getEspecieId());
-		System.out.println("Procedencia Id: " + tropaBean.getProcendeciaId());
 
 		EstablecimientoDAO establecimientoDAO = new EstablecimientoDAO();
 		Establecimiento establecimiento = establecimientoDAO.obtenerEstablecimiento(tropaBean.getEstablecimientoId());
@@ -62,17 +59,27 @@ public class TropaRest {
 		TropaReservada tropaReservada = tropaReservadaDAO.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
 		int ultimoNroTropaReservada = tropaReservada.obtenerSiguienteNroDeTropa();
 
+		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
+		System.out.println("Especie id: " + tropaBean.getEspecieId());
+		System.out.println("Procedencia Id: " + tropaBean.getProcendeciaId());
+		System.out.println("Ultimo numero de tropa reservada: " + ultimoNroTropaReservada);
+		System.out.println("" );
+		
+		
 		TropaDAO tropaDAO = new TropaDAO();
 		Tropa tropa = new Tropa();
 		tropa.setNumeroTropa(ultimoNroTropaReservada);
 		tropa.setEspecie(especie);
+		tropa.setProcedencia(procedencia);
 		tropa.setEstablecimiento(establecimiento);
-		tropa.setAnimalesRecibidos(tropaBean.getAnimalesRecibidos());
+		//tropa.setAnimalesRecibidos(tropaBean.getAnimalesRecibidos());
 		tropa.setFechaFaena(new GregorianCalendar().getTime());
 		//averiguar como hacerlo en una transaccion
 		tropaDAO.salvarTropa(tropa);
 		tropaReservadaDAO.actualizar(tropaReservada);
 		tropaBean.setIdTropa(tropa.getIdTropa());
+		
+		System.out.println("Id de tropa guardado: " + tropa.getIdTropa());
 		tropaBean.setNumeroTropa(ultimoNroTropaReservada);
 		
 		return tropaBean;		
