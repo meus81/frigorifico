@@ -40,26 +40,12 @@
 			<version>1.2.17</version>
 		</dependency>
 
-		<!-- HSQLDB para test -->
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.2.9</version>
-		</dependency>
-
 
 		<!-- QR Code Library -->
 		<dependency>
 			<groupId>net.glxn</groupId>
 			<artifactId>qrgen</artifactId>
 			<version>1.4</version>
-		</dependency>
-
-		<!-- MOCKITO for testing -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>1.10.19</version>
 		</dependency>
 
 		<!-- JAX-RS -->
