@@ -13,6 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
+
 import bean.tropa.TropaBean;
 import especie.Especie;
 import establecimiento.Establecimiento;
@@ -37,6 +39,18 @@ public class TropaRest {
 		System.out.println("El id del parametro de tropa " + id);
 		TropaDAO tropaDAO = new TropaDAO();
 		return tropaDAO.obtenerTropa(id);
+	}
+	
+	@GET
+	@Path("/siguiente_tropa/{id_procedencia}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public TropaReservada obtenerSiguienteNumeroTropa(@PathParam("id_procedencia") int idProcedencia) {
+		System.out.println("El id del parametro de tropa " + idProcedencia);
+		ProcedenciaDAO procedenciaDAO = new ProcedenciaDAO();
+		Procedencia procedencia = procedenciaDAO.obtenerProcedencia(idProcedencia);
+		
+		TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
+		return tropaReservadaDAO.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
 	}
 	
 	@POST
