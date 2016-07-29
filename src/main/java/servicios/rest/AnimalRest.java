@@ -10,7 +10,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import bean.tropa.AnimalBean;
-import ejecutoras.faena.Etiqueta;
 import especie.Especie;
 import tropa.Animal;
 import tropa.Categoria;

@@ -94,7 +94,9 @@ public class TropaRest {
 		tropaBean.setIdTropa(tropa.getIdTropa());
 		
 		System.out.println("Id de tropa guardado: " + tropa.getIdTropa());
+		tropaBean.setFechaFaena(tropa.getFechaFaena());
 		tropaBean.setNumeroTropa(ultimoNroTropaReservada);
+		
 		
 		return tropaBean;		
 	}

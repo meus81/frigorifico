@@ -11,13 +11,11 @@
 	<properties>
 		<jersey2.version>2.21</jersey2.version>
 		<jaxrs.version>2.0.1</jaxrs.version>
-		<fasterxml>2.4.6</fasterxml>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
-	
 		<dependency>
 			<groupId>ar.com.frigorifico-modelo</groupId>
 			<artifactId>frigorifico-modelo</artifactId>
@@ -38,14 +36,6 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
-		</dependency>
-
-
-		<!-- QR Code Library -->
-		<dependency>
-			<groupId>net.glxn</groupId>
-			<artifactId>qrgen</artifactId>
-			<version>1.4</version>
 		</dependency>
 
 		<!-- JAX-RS -->
