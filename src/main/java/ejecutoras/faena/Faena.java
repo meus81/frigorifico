@@ -23,7 +23,7 @@ public class Faena {
 	
 	public void inicializarFaena(Procedencia procedencia, Especie especie) {
 		EstablecimientoDAO establecimientoServicioDatabase = new EstablecimientoDAO();
-		Establecimiento establecimiento = establecimientoServicioDatabase.obtenerEstablecimiento(1);
+		Establecimiento establecimiento = establecimientoServicioDatabase.obtenerEstablecimiento(new Long(1));
 		TropaReservada tropaReservada = tropaReservadaDAO.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
 		
 		ultimoNroTropaReservada = tropaReservada.obtenerSiguienteNroDeTropa();

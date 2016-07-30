@@ -23,7 +23,7 @@ public class ProcedenciaRest {
 	@GET
 	@Path("/procedencia/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Procedencia getProcedencia(@PathParam("id") int id ){
+	public Procedencia getProcedencia(@PathParam("id") Long id ){
 		System.out.println("El id del parametro de procedencia " + id);
 		ProcedenciaDAO procedenciaDAO = new ProcedenciaDAO();
 		return procedenciaDAO.obtenerProcedencia(id);

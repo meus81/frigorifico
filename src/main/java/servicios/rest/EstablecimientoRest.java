@@ -27,7 +27,7 @@ public class EstablecimientoRest {
 	@GET
 	@Path("/establecimiento/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Establecimiento getEstablecimiento(@PathParam("id") int id ){
+	public Establecimiento getEstablecimiento(@PathParam("id") Long id ){
 		System.out.println("El id del parametro de establecimiento " + id);
 		EstablecimientoDAO establecimientoDAO = new EstablecimientoDAO();
 		return establecimientoDAO.obtenerEstablecimiento(id);

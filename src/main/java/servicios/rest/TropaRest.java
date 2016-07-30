@@ -33,7 +33,7 @@ public class TropaRest {
 	@GET
 	@Path("/tropa/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Tropa obtenerTropa(@PathParam("id") int id) {
+	public Tropa obtenerTropa(@PathParam("id") Long id) {
 		System.out.println("El id del parametro de tropa " + id);
 		TropaDAO tropaDAO = new TropaDAO();
 		return tropaDAO.obtenerTropa(id);
@@ -93,7 +93,7 @@ public class TropaRest {
 		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
 		System.out.println("Especie id: " + tropaBean.getEspecieId());
 		
-		tropaBean.setIdTropa(100);
+		tropaBean.setIdTropa(new Long(100));
 		System.out.println(tropaBean);
 		return tropaBean;
 //		return Response

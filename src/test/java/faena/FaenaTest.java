@@ -21,9 +21,9 @@ public class FaenaTest {
 		Faena faena = new Faena();
 		
 		ProcedenciaDAO procedenciaServicio = new ProcedenciaDAO();
-		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1); 
+		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(new Long(1)); 
 		EspecieDAO especieServicio = new EspecieDAO();
-		Especie especie = especieServicio.obtenerEspecie(1);
+		Especie especie = especieServicio.obtenerEspecie(new Long(1));
 		
 		TropaReservadaDAO tropaReservadaServicio = new TropaReservadaDAO();
 		TropaReservada tropaReservada = tropaReservadaServicio.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
@@ -46,14 +46,14 @@ public class FaenaTest {
 		Faena faena = new Faena();
 		
 		ProcedenciaDAO procedenciaServicio = new ProcedenciaDAO();
-		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(1);
+		Procedencia procedencia = procedenciaServicio.obtenerProcedencia(new Long(1));
 		
 		EspecieDAO especieServicio = new EspecieDAO();
-		Especie especie = especieServicio.obtenerEspecie(1);
+		Especie especie = especieServicio.obtenerEspecie(new Long(1));
 		faena.inicializarFaena(procedencia, especie);
 		
 		CategoriaDAO categoriaServicioDatabase = new CategoriaDAO();
-		Categoria categoria = categoriaServicioDatabase.obtenerCategoria(1);
+		Categoria categoria = categoriaServicioDatabase.obtenerCategoria(new Long(1));
 		faena.imprimirEtiqueta(215.20, categoria, true);
 		//TODO mockear el metodo de faena test que imprime etiquetas
 	}

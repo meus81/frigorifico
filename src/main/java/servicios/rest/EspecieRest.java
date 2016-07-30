@@ -19,7 +19,7 @@ public class EspecieRest {
 	@GET
 	@Path("/especie/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Especie getEspecie(@PathParam("id") int id ){
+	public Especie getEspecie(@PathParam("id") Long id ){
 		System.out.println("El id del parametro de especie " + id);
 		EspecieDAO especieDAO = new EspecieDAO();
 		return especieDAO.obtenerEspecie(id);
