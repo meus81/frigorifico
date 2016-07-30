@@ -33,7 +33,7 @@ public class AnimalRest {
 		Categoria categoria = categoriaDAO.obtenerCategoria(animalBean.getIdCategoria());
 		
 		TropaDAO tropaDAO = new TropaDAO();
-		Tropa tropa = tropaDAO.obtenerTropaPorNroTropa(animalBean.getIdTropa());
+		Tropa tropa = tropaDAO.obtenerTropa(animalBean.getIdTropa());
 		
 		System.out.println(tropa);
 		
