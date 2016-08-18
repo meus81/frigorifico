@@ -12,20 +12,19 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-
-import com.google.gson.Gson;
+import javax.ws.rs.core.Response;
 
 import bean.tropa.TropaBean;
 import especie.Especie;
 import establecimiento.Establecimiento;
-import tropa.Procedencia;
-import tropa.Tropa;
-import tropa.TropaReservada;
 import servicios.EspecieDAO;
 import servicios.EstablecimientoDAO;
 import servicios.ProcedenciaDAO;
 import servicios.TropaDAO;
 import servicios.TropaReservadaDAO;
+import tropa.Procedencia;
+import tropa.Tropa;
+import tropa.TropaReservada;
 
 
 @ApplicationPath("/resources")
@@ -71,8 +70,8 @@ public class TropaRest {
 		
 		TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
 		TropaReservada tropaReservada = tropaReservadaDAO.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
-		int ultimoNroTropaReservada = tropaReservada.obtenerSiguienteNroDeTropa();
-
+		int ultimoNroTropaReservada = tropaBean.getNumeroTropa();
+		
 		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
 		System.out.println("Especie id: " + tropaBean.getEspecieId());
 		System.out.println("Procedencia Id: " + tropaBean.getProcendeciaId());
@@ -86,9 +85,9 @@ public class TropaRest {
 		tropa.setEspecie(especie);
 		tropa.setProcedencia(procedencia);
 		tropa.setEstablecimiento(establecimiento);
-		//tropa.setAnimalesRecibidos(tropaBean.getAnimalesRecibidos());
+
 		tropa.setFechaFaena(new GregorianCalendar().getTime());
-		//averiguar como hacerlo en una transaccion
+		//TODO averiguar como hacerlo en una transaccion
 		tropaDAO.salvarTropa(tropa);
 		tropaReservadaDAO.actualizar(tropaReservada);
 		tropaBean.setIdTropa(tropa.getIdTropa());
@@ -96,7 +95,6 @@ public class TropaRest {
 		System.out.println("Id de tropa guardado: " + tropa.getIdTropa());
 		tropaBean.setFechaFaena(tropa.getFechaFaena());
 		tropaBean.setNumeroTropa(ultimoNroTropaReservada);
-		
 		
 		return tropaBean;		
 	}
@@ -112,16 +110,28 @@ public class TropaRest {
 		tropaBean.setIdTropa(100);
 		System.out.println(tropaBean);
 		return tropaBean;
-//		return Response
-//				.status(200)
-//				.header("Access-Control-Allow-Origin", "*")
-//				.header("Access-Control-Allow-Headers",
-//				        "origin, content-type, accept, authorization")
-//				.header("Access-Control-Allow-Credentials", "true")
-//				.header("Access-Control-Allow-Methods",
-//				        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-//				.header("Access-Control-Max-Age", "1209600")
-//				.entity(tropaBean)
-//				.build();
 	}
+	
+	@GET
+	@Path("/verificar_tropa_faenada/{nro_tropa}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response verificar_nro_tropa_faenada(@PathParam("nro_tropa") int nroTropa) {
+		System.out.println("El nro de tropa es " + nroTropa);
+		
+		TropaDAO tropaDao = new TropaDAO();
+		Tropa tropa = tropaDao.obtenerTropaPorNroTropa(nroTropa);
+		if (tropa != null){
+			if (tropa.getFechaFaena() != null){
+				String json = "{\"result\": \"true\"}";
+				return Response.status(200).header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD")
+						.entity(json).build();
+			}
+		}
+		
+		String json = "{\"result\": \"false\"}";
+		return Response.status(200).header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD")
+				.entity(json).build();
+
+	}
+	
 }
