@@ -118,6 +118,7 @@ public class TropaRest {
 	public Response verificar_nro_tropa_faenada(@PathParam("nro_tropa") int nroTropa, 
 												@PathParam("id_procedencia") int idProcedencia) {
 		System.out.println("El nro de tropa es " + nroTropa);
+		System.out.println("El nro de procedencia es " + idProcedencia);
 		
 		TropaDAO tropaDao = new TropaDAO();
 		Tropa tropa = tropaDao.obtenerTropaPorNroTropa(nroTropa, idProcedencia);
