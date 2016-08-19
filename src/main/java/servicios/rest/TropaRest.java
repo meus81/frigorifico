@@ -113,13 +113,14 @@ public class TropaRest {
 	}
 	
 	@GET
-	@Path("/verificar_tropa_faenada/{nro_tropa}")
+	@Path("/verificar_tropa_faenada/{nro_tropa}/{id_procedencia}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response verificar_nro_tropa_faenada(@PathParam("nro_tropa") int nroTropa) {
+	public Response verificar_nro_tropa_faenada(@PathParam("nro_tropa") int nroTropa, 
+												@PathParam("id_procedencia") int idProcedencia) {
 		System.out.println("El nro de tropa es " + nroTropa);
 		
 		TropaDAO tropaDao = new TropaDAO();
-		Tropa tropa = tropaDao.obtenerTropaPorNroTropa(nroTropa);
+		Tropa tropa = tropaDao.obtenerTropaPorNroTropa(nroTropa, idProcedencia);
 		if (tropa != null){
 			if (tropa.getFechaFaena() != null){
 				String json = "{\"result\": \"true\"}";
