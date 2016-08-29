@@ -97,7 +97,7 @@ public class TropaRest {
 		//TODO averiguar como hacerlo en una transaccion
 		tropaDAO.salvarTropa(tropa);
 
-		tropaReservada.setUltima_tropa(ultimoNroTropaReservada + 1);
+		tropaReservada.setUltima_tropa(ultimoNroTropaReservada);
 		tropaReservadaDAO.actualizar(tropaReservada);
 		
 		System.out.println("Id de tropa guardado: " + tropa.getIdTropa());
