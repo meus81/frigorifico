@@ -65,7 +65,6 @@ public class AnimalRest {
 	@Path("/obtener_siguiente_garron")
 	@Produces(MediaType.APPLICATION_JSON)
 	public AnimalBean getGarron() {
-		System.out.println("El siguiente numero de garron es:  ");
 		AnimalBean animal = new AnimalBean();
 		TropaDAO tropaDAO = new TropaDAO();
 		int siguienteGarron = tropaDAO.obtenerSiguienteNumeroDeGarron();
