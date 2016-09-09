@@ -26,11 +26,10 @@ import tropa.Procedencia;
 import tropa.Tropa;
 import tropa.TropaReservada;
 
-
 @ApplicationPath("/resources")
 @Path("/")
 public class TropaRest {
-	
+
 	@GET
 	@Path("/tropa/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -39,7 +38,7 @@ public class TropaRest {
 		TropaDAO tropaDAO = new TropaDAO();
 		return tropaDAO.obtenerTropa(id);
 	}
-	
+
 	@GET
 	@Path("/siguiente_tropa/{id_procedencia}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -47,109 +46,126 @@ public class TropaRest {
 		System.out.println("El id del parametro de tropa " + idProcedencia);
 		ProcedenciaDAO procedenciaDAO = new ProcedenciaDAO();
 		Procedencia procedencia = procedenciaDAO.obtenerProcedencia(idProcedencia);
-		
+
 		TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
 		return tropaReservadaDAO.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
 	}
-	
+
+	@GET
+	@Path("/resetear_numero_tropa/{id_procedencia}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response resetearNumeroTropa(@PathParam("id_procedencia") int idProcedencia) {
+		ProcedenciaDAO procedenciaDAO = new ProcedenciaDAO();
+		Procedencia procedencia = procedenciaDAO.obtenerProcedencia(idProcedencia);
+
+		TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
+		if (tropaReservadaDAO.resetearNumeroTropa(procedencia)) {
+			String json = "{\"result\": \"true\"}";
+			return Response.status(200).header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+					.entity(json).build();
+		}else {
+			String json = "{\"result\": \"false\"}";
+			return Response.status(200).header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+					.entity(json).build();
+		}
+		
+	}
+
 	@POST
 	@Path("/nueva_tropa_en_palco")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public TropaBean salvarTropaEnPalco(final TropaBean tropaBean){
-		
+	public TropaBean salvarTropaEnPalco(final TropaBean tropaBean) {
 
 		EstablecimientoDAO establecimientoDAO = new EstablecimientoDAO();
 		Establecimiento establecimiento = establecimientoDAO.obtenerEstablecimiento(tropaBean.getEstablecimientoId());
-		
+
 		EspecieDAO especieDAO = new EspecieDAO();
 		Especie especie = especieDAO.obtenerEspecie(tropaBean.getEspecieId());
-		
+
 		ProcedenciaDAO procedenciaDAO = new ProcedenciaDAO();
 		Procedencia procedencia = procedenciaDAO.obtenerProcedencia(tropaBean.getProcendeciaId());
-		
+
 		TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
 		TropaReservada tropaReservada = tropaReservadaDAO.obtenerTropaReservadaPorProcedenciaYanioActual(procedencia);
-		
-		
+
 		int ultimoNroTropaReservada = tropaBean.getNumeroTropa();
-		
+
 		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
 		System.out.println("Especie id: " + tropaBean.getEspecieId());
 		System.out.println("Procedencia Id: " + tropaBean.getProcendeciaId());
 		System.out.println("Ultimo numero de tropa reservada: " + ultimoNroTropaReservada);
-		System.out.println("" );
-		
-		
+		System.out.println("");
+
 		TropaDAO tropaDAO = new TropaDAO();
 		Tropa tropa = tropaDAO.obtenerTropaPorNroTropa(ultimoNroTropaReservada, procedencia.getIdProcedencia());
-		
-		if (tropa == null){
+
+		if (tropa == null) {
 			tropa = new Tropa();
 			tropa.setNumeroTropa(ultimoNroTropaReservada);
 			tropa.setEspecie(especie);
 			tropa.setProcedencia(procedencia);
 			tropa.setEstablecimiento(establecimiento);
 		}
-		
+
 		tropa.setFechaFaena(new GregorianCalendar().getTime());
-		
-		//TODO averiguar como hacerlo en una transaccion
+
+		// TODO averiguar como hacerlo en una transaccion
 		tropaDAO.salvarTropa(tropa);
 
-		tropaReservada.setUltima_tropa(ultimoNroTropaReservada);
+		tropaReservada.setUltimaTropa(ultimoNroTropaReservada);
 		tropaReservadaDAO.actualizar(tropaReservada);
-		
+
 		System.out.println("Id de tropa guardado: " + tropa.getIdTropa());
 		tropaBean.setIdTropa(tropa.getIdTropa());
 		tropaBean.setFechaFaena(tropa.getFechaFaena());
-		return tropaBean;		
+		return tropaBean;
 	}
-	
+
 	@GET
 	@Path("/verificar_tropa_faenada/{nro_tropa}/{id_procedencia}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response estaLaTropaFaenada(@PathParam("nro_tropa") int nroTropa, 
-										@PathParam("id_procedencia") int idProcedencia) {
+	public Response estaLaTropaFaenada(@PathParam("nro_tropa") int nroTropa,
+			@PathParam("id_procedencia") int idProcedencia) {
 		System.out.println("El nro de tropa es " + nroTropa);
 		System.out.println("El nro de procedencia es " + idProcedencia);
-		
+
 		TropaDAO tropaDao = new TropaDAO();
 		Tropa tropa = tropaDao.obtenerTropaPorNroTropa(nroTropa, idProcedencia);
-		
+
 		TropaReservadaDAO tropaReservadaDAO = new TropaReservadaDAO();
 		boolean rangoCorrecto = tropaReservadaDAO.verificarTropaEnTropaReservada(nroTropa, idProcedencia);
-		
-		if (rangoCorrecto){
-			if(tropa != null){
-				if (tropa.getFechaFaena() != null){
+
+		if (rangoCorrecto) {
+			if (tropa != null) {
+				if (tropa.getFechaFaena() != null) {
 					String json = "{\"result\": \"true\"}";
-					return Response.status(200).header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD")
+					return Response.status(200)
+							.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
 							.entity(json).build();
 				}
 			}
-		}else{
+		} else {
 			String json = "{\"result\": \"true\"}";
-			return Response.status(200).header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD")
+			return Response.status(200).header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
 					.entity(json).build();
 		}
 		String json = "{\"result\": \"false\"}";
-		return Response.status(200).header("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, OPTIONS, HEAD")
+		return Response.status(200).header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
 				.entity(json).build();
 	}
-	
-	
+
 	@POST
 	@Path("/nueva_tropa")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public TropaBean salvarTropa(final TropaBean tropaBean, @Context HttpServletResponse response){
+	public TropaBean salvarTropa(final TropaBean tropaBean, @Context HttpServletResponse response) {
 		System.out.println("Estableciento id: " + tropaBean.getEstablecimientoId());
 		System.out.println("Especie id: " + tropaBean.getEspecieId());
-		
+
 		tropaBean.setIdTropa(100);
 		System.out.println(tropaBean);
 		return tropaBean;
 	}
-	
+
 }
